@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddqip2765j8wo"]
+
+[ext_resource type="PackedScene" uid="uid://ci3ebh5513arr" path="res://scenes/ui_contoller/ui_contoller.tscn" id="1_f3sb7"]
+
+[node name="world" type="Node"]
+
+[node name="ui_contoller" parent="." instance=ExtResource("1_f3sb7")]
