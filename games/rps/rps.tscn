@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cy83mypmppqyf"]
+
+[ext_resource type="PackedScene" uid="uid://r40xf4jofr4q" path="res://games/rps/screens/options/options.tscn" id="1_gimk2"]
+[ext_resource type="Script" uid="uid://r3cqer5cksp7" path="res://games/rps/rps.gd" id="1_yjitw"]
+
+[node name="rps" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_yjitw")
+
+[node name="options" parent="." instance=ExtResource("1_gimk2")]
+layout_mode = 1

@@ -1,114 +1,40 @@
-[gd_scene load_steps=3 format=3 uid="uid://bnccu2ow4wabv"]
+[gd_scene load_steps=4 format=3 uid="uid://bnccu2ow4wabv"]
 
 [ext_resource type="Script" uid="uid://cegpwxwxwf45p" path="res://scenes/main_menu/main_menu.gd" id="1_fsom3"]
-[ext_resource type="PackedScene" uid="uid://bwf3gm88mm751" path="res://scenes/games/rps/rps.tscn" id="2_0ebjn"]
+[ext_resource type="PackedScene" uid="uid://2loq2bltv74p" path="res://scenes/main_menu/screens/play_screen/play_screen.tscn" id="3_ob46e"]
+[ext_resource type="PackedScene" uid="uid://dheswd8eoh5t" path="res://scenes/main_menu/screens/game_selection/game_selection.tscn" id="4_uqeha"]
 
 [node name="main_menu" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_fsom3")
-available_games = Dictionary[String, PackedScene]({
-"rps": ExtResource("2_0ebjn")
-})
 
-[node name="first_screen" type="CanvasLayer" parent="."]
-
-[node name="play" type="Button" parent="first_screen"]
+[node name="play_screen" parent="." instance=ExtResource("3_ob46e")]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -179.0
-offset_top = -48.0
-offset_right = 179.0
-offset_bottom = 48.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 32
-text = "play game"
 
-[node name="second_screen" type="CanvasLayer" parent="."]
+[node name="game_selection" parent="." instance=ExtResource("4_uqeha")]
 visible = false
-
-[node name="games" type="Control" parent="second_screen"]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="rps" type="Button" parent="second_screen/games"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -179.0
-offset_top = -213.0
-offset_right = 179.0
-offset_bottom = -117.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 32
-text = "RPS"
+offset_top = 0.0
+offset_bottom = 0.0
+scale = Vector2(0.9720244, 0.98248845)
 
-[node name="test1" type="Button" parent="second_screen/games"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -179.0
-offset_top = -106.0
-offset_right = 179.0
-offset_bottom = -10.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 32
-text = "test1"
+[connection signal="pressed" from="play_screen/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="game_selection/confirm" to="." method="_on_confirm_pressed"]
 
-[node name="test2" type="Button" parent="second_screen/games"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -175.0
-offset_top = -2.0
-offset_right = 183.0
-offset_bottom = 94.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_font_sizes/font_size = 32
-text = "test2"
-
-[node name="confirm" type="Button" parent="second_screen"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -123.00003
-offset_top = 190.0
-offset_right = 235.0
-offset_bottom = 286.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.76, 0.8399988)
-theme_override_font_sizes/font_size = 24
-disabled = true
-text = "select a game!"
-
-[node name="game_holder" type="Node" parent="."]
-
-[connection signal="pressed" from="first_screen/play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="second_screen/confirm" to="." method="_on_confirm_pressed"]
+[editable path="play_screen"]
+[editable path="game_selection"]

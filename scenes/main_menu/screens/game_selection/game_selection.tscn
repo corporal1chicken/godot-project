@@ -1,0 +1,75 @@
+[gd_scene load_steps=2 format=3 uid="uid://dheswd8eoh5t"]
+
+[ext_resource type="Script" uid="uid://cj2gaxrkfu3a0" path="res://scenes/main_menu/screens/game_selection/game_selection.gd" id="1_mykm0"]
+
+[node name="game_selection" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mykm0")
+avaliable_games = Array[String](["rps"])
+
+[node name="games" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="rps" type="Button" parent="games"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -179.0
+offset_top = -213.0
+offset_right = 179.0
+offset_bottom = -117.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "RPS"
+
+[node name="test1" type="Button" parent="games"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -179.0
+offset_top = -106.0
+offset_right = 179.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "test1"
+
+[node name="confirm" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.0
+offset_top = 191.0
+offset_right = 235.0
+offset_bottom = 287.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.76, 0.8399988)
+theme_override_font_sizes/font_size = 24
+disabled = true
+text = "select a game!"
