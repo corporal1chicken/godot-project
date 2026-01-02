@@ -18,3 +18,7 @@ Changed how menus are made so it's easier to add/remove screens. Also rewrote al
 ---
 ### Commit 4: This Stupid README
 It didn't update so it made a new commit and that's so annoying.
+
+---
+### Commit 5: Implemented actual Rock Paper Scissors
+Game is actually playable. Pick a difficulty (easy/medium/hard) and it'll change how long you have to pick your move. AI is simple, just picking a move at random so this'll change to reflect difficulty. Also a score count at the top and round end text (you lose! Y beats X).
