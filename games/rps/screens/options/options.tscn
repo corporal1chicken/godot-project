@@ -11,6 +11,36 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_h5ud6")
 
+[node name="gamemodes" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 188.0
+offset_top = -82.99997
+offset_right = 329.0
+offset_bottom = 84.00003
+grow_vertical = 2
+scale = Vector2(1.0167471, 1)
+
+[node name="best_of" type="Button" parent="gamemodes"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "best of 5
+"
+
+[node name="first_to" type="Button" parent="gamemodes"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "first to 3
+"
+
+[node name="endless" type="Button" parent="gamemodes"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "endless
+"
+
 [node name="difficulties" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 4
@@ -56,4 +86,4 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.76, 0.8399988)
 theme_override_font_sizes/font_size = 24
-text = "start game (easy mode)"
+text = "start endless (easy)"

@@ -7,4 +7,4 @@ func _on_start_pressed():
 	options.visible = false
 	main.visible = true
 	
-	main.start_round(options.chosen_difficulty)
+	main.start_game(options.difficulty_info.get(options.chosen_difficulty), options.chosen_gamemode)
