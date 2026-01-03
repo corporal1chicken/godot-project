@@ -30,3 +30,7 @@ Separated logic so it's easier to add or remove stuff. Also added gamemodes thou
 ---
 ### Commit 7: Survival Mode and Streak
 Streak and best streak counter during RPS. Survival mode where you play until you lose your streak. Also added a quit button to quit midgame, and the game actually resets every new game.
+
+---
+### Commit 8: Rewrote main.gd + Small Stuff
+Completely rewritten so everything is clearer and less repeated code. Also added rounds played counter and keybinds for the moves (1/2/3 for rock/paper/scissors). Changed how difficulty and gamemode rules are set to be less hardcoded.

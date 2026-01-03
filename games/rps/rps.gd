@@ -10,7 +10,9 @@ func _on_start_pressed():
 	options.visible = false
 	main.visible = true
 	
-	main.begin_game(options.difficulty_info.get(options.chosen_difficulty), options.chosen_gamemode)
+	var result = options.get_selected_options()
+	
+	main.start_game(result.gamemode, result.difficulty)
 
 func _change_sub_screen(old_screen: String, new_screen: String):
 	var old_child: Control = get_node(old_screen)

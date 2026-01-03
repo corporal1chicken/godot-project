@@ -10,6 +10,36 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_h5ud6")
+difficulty_config = {
+&"easy": {
+"timer_length": 10.0
+},
+&"hard": {
+"timer_length": 3.0
+},
+&"medium": {
+"timer_length": 6.0
+}
+}
+gamemode_conifg = {
+&"best_of": {
+"name": "best_of",
+"total_rounds": 5
+},
+&"endless": {
+"name": "endless",
+"total_rounds": "inf"
+},
+&"first_to": {
+"max_score": 3,
+"name": "first_to",
+"total_rounds": "inf"
+},
+&"survival": {
+"name": "survival",
+"total_rounds": "inf"
+}
+}
 
 [node name="gamemodes" type="VBoxContainer" parent="."]
 layout_mode = 1
