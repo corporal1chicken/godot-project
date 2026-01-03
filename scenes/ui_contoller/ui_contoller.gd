@@ -1,10 +1,5 @@
 extends Node
 
-#TO ADD:
-# 'E' to go to the next screen
-# add change_sub_screen, similar to change_screen
-# quit button when in a game
-
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 
 func _ready() -> void:

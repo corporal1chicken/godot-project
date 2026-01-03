@@ -26,3 +26,7 @@ Game is actually playable. Pick a difficulty (easy/medium/hard) and it'll change
 ---
 ### Commit 6: Cleaned up game logic for Rock Paper Scissors
 Separated logic so it's easier to add or remove stuff. Also added gamemodes though hardcoded. Best of 5, First to 3 and Endless. Can select this from the options screen.
+
+---
+### Commit 7: Survival Mode and Streak
+Streak and best streak counter during RPS. Survival mode where you play until you lose your streak. Also added a quit button to quit midgame, and the game actually resets every new game.

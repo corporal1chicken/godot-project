@@ -3,11 +3,16 @@ extends Control
 # Future Ideas:
 # - AI changes based on difficulty
 # - Custom First To and Best Of parameters
+# - Quit game button
 
 # Needed:
 # - Reset game function
-# - When the game ends, going back to the selection screen
-# - Likely a determine game winner function
+# - Update text function
+# - Determine game winner function
+# - Determine streak function
+
+# Could seperate AI, game and gamemode logic
+# All scripts attached to the main screen instead of each sub screen
 
 @onready var time_left: RichTextLabel = $time_left
 @onready var timer: Timer = $Timer
@@ -26,7 +31,11 @@ var player_score: int = 0
 var computer_score: int = 0
 var draws: int = 0
 
-var games_played: int = 0
+var rounds_played: int = 0
+var current_streak: int = 0
+var best_streak: int = 0
+
+var game_ended = false
 
 func _ready() -> void:
 	for child in $moves.get_children():
@@ -59,9 +68,10 @@ func _end_current_round():
 	$continue.visible = true
 	$round_text.visible = true
 	
-	games_played += 1
+	rounds_played += 1
 	
 	$score_count.text = "player: " + str(player_score) + " | computer: " + str(computer_score)
+	$streak.text = "streak: %d\nbest: %d" % [current_streak, best_streak]
 
 func _get_computer_move() -> String:
 	return RULES.keys().pick_random()
@@ -70,6 +80,11 @@ func _get_winner():
 	if player_move == "":
 		$round_text.text = "you didn't pick a move."
 		computer_score += 1
+		
+		if current_streak > best_streak:
+			best_streak = current_streak
+		
+		current_streak = 0
 	else:
 		var computer_move = _get_computer_move()
 		$ai_move.text = "AI move: " + computer_move + " | your move: " + player_move
@@ -80,14 +95,20 @@ func _get_winner():
 		elif computer_move in RULES.get(player_move):
 			$round_text.text = "you win! " + player_move + " beats " + computer_move
 			player_score += 1
+			current_streak += 1
+			
+			if current_streak > best_streak:
+				best_streak = current_streak
 		else:
 			$round_text.text = "you lose! " + computer_move + " beats " + player_move
 			computer_score += 1
+			
+			if current_streak != 0 and current_streak > best_streak:
+				best_streak = current_streak
+			
+			current_streak = 0
 
-func start_game(new_difficulty_info: Dictionary, gamemode: String):
-	difficulty_info = new_difficulty_info
-	current_gamemode = gamemode
-	
+func _continue_game():	
 	_set_new_round()
 	
 	timer.start(difficulty_info.timer_length)
@@ -95,14 +116,37 @@ func start_game(new_difficulty_info: Dictionary, gamemode: String):
 	
 	_end_current_round()
 	
-	if gamemode == "best_of":
-		if games_played == 5:
+	if current_gamemode == "best_of":
+		if rounds_played == 5:
 			_end_game()
 			return
-	elif gamemode == "first_to":
+	elif current_gamemode == "first_to":
 		if player_score == 3 or computer_score == 3:
 			_end_game()
 			return
+	elif current_gamemode == "survival":
+		if current_streak == 0 and rounds_played != 0:
+			_end_game()
+			return
+			
+func begin_game(new_difficulty_info: Dictionary, gamemode: String):
+	difficulty_info = new_difficulty_info
+	current_gamemode = gamemode
+	
+	game_ended = false
+	rounds_played = 0
+	player_score = 0
+	computer_score = 0
+	draws = 0
+	
+	current_streak = 0
+	best_streak = current_streak
+	
+	$score_count.text = "player: " + str(player_score) + " | computer: " + str(computer_score)
+	$streak.text = "streak: %d\nbest: %d" % [current_streak, best_streak]
+	$ai_move.visible = true
+	
+	_continue_game()
 		
 func _end_game():
 	_toggle_button_state(true)
@@ -110,6 +154,13 @@ func _end_game():
 	$ai_move.visible = false
 	$round_text.visible = true
 	
+	game_ended = true
+	
 func _on_continue_pressed():
-	start_game(difficulty_info, current_gamemode)
-	pass
+	if not game_ended:
+		_continue_game()
+	else:
+		Signals.change_sub_screen.emit("main", "options")
+
+func _on_quit_pressed():
+	Signals.change_sub_screen.emit("main", "options")

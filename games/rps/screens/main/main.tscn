@@ -64,6 +64,23 @@ scale = Vector2(0.76, 0.8399988)
 theme_override_font_sizes/font_size = 24
 text = "continue"
 
+[node name="quit" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -629.0
+offset_top = 262.00006
+offset_right = -270.99994
+offset_bottom = 358.00006
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.76, 0.8399988)
+theme_override_font_sizes/font_size = 24
+text = "quit"
+
 [node name="time_left" type="RichTextLabel" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -78,6 +95,23 @@ grow_vertical = 2
 scale = Vector2(1, 1.0093395)
 theme_override_font_sizes/normal_font_size = 64
 text = "time left: 5.0"
+horizontal_alignment = 1
+
+[node name="streak" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 17.0
+offset_right = -1149.0
+offset_bottom = -625.72174
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.0093395)
+theme_override_font_sizes/normal_font_size = 24
+text = "streak: 0
+best: 0"
 horizontal_alignment = 1
 
 [node name="score_count" type="RichTextLabel" parent="."]
@@ -136,3 +170,4 @@ wait_time = 5.0
 one_shot = true
 
 [connection signal="pressed" from="continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]

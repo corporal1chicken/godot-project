@@ -35,6 +35,11 @@ theme_override_font_sizes/font_size = 32
 text = "first to 3
 "
 
+[node name="survival" type="Button" parent="gamemodes"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "survival"
+
 [node name="endless" type="Button" parent="gamemodes"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
