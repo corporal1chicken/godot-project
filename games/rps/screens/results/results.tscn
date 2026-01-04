@@ -1,0 +1,111 @@
+[gd_scene load_steps=2 format=3 uid="uid://3a8r1nynk5vm"]
+
+[ext_resource type="Script" uid="uid://df8f1soqrcgcu" path="res://games/rps/screens/results/results.gd" id="1_n0b7d"]
+
+[node name="results" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n0b7d")
+
+[node name="return" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -629.0
+offset_top = 262.00006
+offset_right = -270.99994
+offset_bottom = 358.00006
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.76, 0.8399988)
+theme_override_font_sizes/font_size = 24
+text = "return"
+
+[node name="game_length" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = 157.0
+offset_right = -2.0
+offset_bottom = -492.65695
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.0093395)
+theme_override_font_sizes/normal_font_size = 46
+text = "game length: 32"
+horizontal_alignment = 1
+
+[node name="score" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = 217.00002
+offset_right = -2.0
+offset_bottom = -432.65692
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.0093395)
+theme_override_font_sizes/normal_font_size = 46
+text = "score: [4] player | [1] AI | [2] draws"
+horizontal_alignment = 1
+
+[node name="rounds_played" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = 281.0
+offset_right = -2.0
+offset_bottom = -368.65695
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.0093395)
+theme_override_font_sizes/normal_font_size = 46
+text = "rounds played: 1"
+horizontal_alignment = 1
+
+[node name="streak" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = 341.0
+offset_right = -2.0
+offset_bottom = -308.65692
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.0093395)
+theme_override_font_sizes/normal_font_size = 46
+text = "streak: 1 | best: 4"
+horizontal_alignment = 1
+
+[node name="played_moves" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = 399.0
+offset_right = -2.0
+offset_bottom = -250.65692
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.0093395)
+theme_override_font_sizes/normal_font_size = 46
+text = "played: rock (3) | paper (2) | scissors (4)"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="return" to="." method="_on_return_pressed"]

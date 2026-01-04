@@ -1,10 +1,11 @@
 extends Control
 
-# Future Ideas:
-# - AI changes based on difficulty
-# - Custom First To and Best Of parameters
+# Could have a retrieve_information so gamemode_info and difficulty_info
+# are no longer needed here
 
 @export var ai: Node
+@export var results: Node
+@export var gamemode: Node
 
 @onready var timer: Timer = $Timer
 
@@ -20,12 +21,22 @@ var difficulty_info: Dictionary
 var player_move: String = ""
 var computer_move: String
 
+var player_history: Array = []
+
 var player_score: int = 0
 var computer_score: int = 0
 var draws: int = 0
 var rounds_played: int = 0
 var current_streak: int = 0
 var best_streak: int = 0
+
+var played_moves: Dictionary = {
+	"rock" = 0,
+	"paper" = 0,
+	"scissors" = 0
+}
+
+var total_playtime: float = 0.0
 
 var game_ended = false
 
@@ -34,33 +45,46 @@ func _ready() -> void:
 	for child in $moves.get_children():
 		child.pressed.connect(_on_move_pressed.bind(child.name))
 		
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if timer.is_stopped():
 		return
 		
 	$time_left.text = "time left: %.1f" % timer.time_left
 	
+	if not game_ended:
+		total_playtime += delta
+	
 	pass
 	
 func _unhandled_input(event: InputEvent) -> void:
-	if game_ended or $moves.get_child(0).disabled:
+	if game_ended:
 		return
 		
 	if event.is_action_pressed("rps_rock"):
+		if $moves.get_child(0).disabled: return
 		_on_move_pressed("rock")
 		$moves/rock.grab_focus()
 	elif event.is_action_pressed("rps_paper"):
+		if $moves.get_child(0).disabled: return
 		_on_move_pressed("paper")
 		$moves/paper.grab_focus()
 	elif event.is_action_pressed("rps_scissors"):
+		if $moves.get_child(0).disabled: return
 		_on_move_pressed("scissors")
 		$moves/scissors.grab_focus()
+	elif event.is_action_pressed("continue"):
+		if $continue.visible == false:
+			return
+			
+		_on_continue_pressed()
+		$continue.grab_focus()
 	
 	pass
 
 # On Button Press Functions
 func _on_move_pressed(move: String):
 	player_move = move
+	played_moves[move] = played_moves.get(move) + 1
 	
 	pass
 	
@@ -78,19 +102,6 @@ func _on_quit_pressed():
 	pass
 
 # Helper Functions
-func _check_gamemode_rules() -> bool:
-	if gamemode_info.name == "best_of":
-		if rounds_played == gamemode_info.total_rounds:
-			return true
-	elif gamemode_info.name == "first_to":
-		if player_score == gamemode_info.max_score or computer_score == gamemode_info.max_score:
-			return true
-	elif gamemode_info.name == "survival":
-		if current_streak == 0 and rounds_played > 0:
-			return true
-			
-	return false
-	
 func _determine_streak(outcome: String):
 	if outcome == "win":
 		current_streak += 1
@@ -106,7 +117,7 @@ func _determine_streak(outcome: String):
 	pass
 	
 func _update_round_text():
-	$score_count.text = "player: " + str(player_score) + " | computer: " + str(computer_score)
+	$score_count.text = "player: %d | AI: %d" % [player_score, computer_score]
 	$streak.text = "streak: %d\nbest: %d" % [current_streak, best_streak]
 	$rounds_played.text = "round\n" + str(rounds_played) + "/" + str(gamemode_info.get("total_rounds"))
 	
@@ -129,6 +140,9 @@ func _get_winner():
 		computer_score += 1
 		_determine_streak("loss")
 	
+	if player_move != "":
+		player_history.append(player_move)
+
 	pass
 	
 func _toggle_moves_button(new_state: bool):
@@ -165,16 +179,23 @@ func _reset_game():
 	game_ended = false
 	rounds_played = 0
 	player_score = 0
-	computer_score = 0
 	draws = 0
 	current_streak = 0
 	best_streak = 0
+	computer_score = 0
+	player_history = []
+	
+	# Hardcoded for now
+	if gamemode_info.name == "comeback":
+		computer_score += 3
 	
 	pass
 	
 func start_game(chosen_gamemode: Dictionary, chosen_difficulty: Dictionary):
 	gamemode_info = chosen_gamemode
 	difficulty_info = chosen_difficulty
+	
+	gamemode.set_gamemode_info(chosen_gamemode)
 	
 	_reset_game()
 	_update_round_text()
@@ -184,19 +205,21 @@ func start_game(chosen_gamemode: Dictionary, chosen_difficulty: Dictionary):
 	
 func _end_game():
 	_toggle_moves_button(true)
-	$time_left.text = "game ended"
-	$ai_move.visible = false
-	$round_end.visible = true
 	
 	game_ended = true
 	
-	if computer_score > player_score:
-		$round_end.text = "AI won with " + str(computer_score) + " by " + str(computer_score - player_score) + " points"
-	elif player_score > computer_score:
-		$round_end.text = "you won with " + str(player_score) + " by " + str(player_score - computer_score) + " points"
-	else:
-		$round_end.text = "it was a draw"
+	results.set_results_screen({
+		"playtime" = int(total_playtime),
+		"player_score" = player_score,
+		"computer_score" = computer_score,
+		"draws" = draws,
+		"rounds_played" = rounds_played,
+		"streak" = current_streak,
+		"best_streak" = best_streak,
+		"played_moves" = played_moves,
+	})
 	
+	Signals.change_sub_screen.emit("main", "results")
 	pass
 	
 func _main_loop():
@@ -205,11 +228,20 @@ func _main_loop():
 	timer.start(difficulty_info.timer_length)
 	await timer.timeout
 	
-	computer_move = ai.get_computer_move()
+	computer_move = ai.get_computer_move(player_move)
 	
 	_end_round()
 	
-	if _check_gamemode_rules():
+	var state = {
+		"rounds_played" = rounds_played,
+		"player_score" = player_score,
+		"computer_score" = computer_score,
+		"current_streak" = current_streak,
+		"player_history" = player_history,
+		"player_move" = player_move
+	}
+	
+	if gamemode.check_rules(state):
 		_end_game()
 	
 	pass

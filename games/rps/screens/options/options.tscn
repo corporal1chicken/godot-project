@@ -21,25 +21,6 @@ difficulty_config = {
 "timer_length": 6.0
 }
 }
-gamemode_conifg = {
-&"best_of": {
-"name": "best_of",
-"total_rounds": 5
-},
-&"endless": {
-"name": "endless",
-"total_rounds": "inf"
-},
-&"first_to": {
-"max_score": 3,
-"name": "first_to",
-"total_rounds": "inf"
-},
-&"survival": {
-"name": "survival",
-"total_rounds": "inf"
-}
-}
 
 [node name="gamemodes" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -69,6 +50,16 @@ text = "first to 3
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "survival"
+
+[node name="comeback" type="Button" parent="gamemodes"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "comeback"
+
+[node name="no_repeat" type="Button" parent="gamemodes"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "no repeat"
 
 [node name="endless" type="Button" parent="gamemodes"]
 layout_mode = 2

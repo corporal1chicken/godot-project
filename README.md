@@ -34,3 +34,7 @@ Streak and best streak counter during RPS. Survival mode where you play until yo
 ---
 ### Commit 8: Rewrote main.gd + Small Stuff
 Completely rewritten so everything is clearer and less repeated code. Also added rounds played counter and keybinds for the moves (1/2/3 for rock/paper/scissors). Changed how difficulty and gamemode rules are set to be less hardcoded.
+
+---
+### Commit 9: Gameplay Stuff
+2 more gamemodes, comeback and no repeat. Comback has a max of 8 rounds and the AI starts on 3 points. No repeat doesn't let you play the same move twice. Dedicated results screen which shows more information such as how many times you played each move, total playtime. Also able to click 'enter' to go the next round (similar to 1/2/3 for the moves). Also tracks player history and AI set up.

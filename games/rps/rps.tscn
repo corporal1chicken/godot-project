@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cy83mypmppqyf"]
+[gd_scene load_steps=5 format=3 uid="uid://cy83mypmppqyf"]
 
 [ext_resource type="PackedScene" uid="uid://r40xf4jofr4q" path="res://games/rps/screens/options/options.tscn" id="1_gimk2"]
 [ext_resource type="Script" uid="uid://r3cqer5cksp7" path="res://games/rps/rps.gd" id="1_yjitw"]
 [ext_resource type="PackedScene" uid="uid://brj0pxw043y7c" path="res://games/rps/screens/main/main.tscn" id="3_ru1hn"]
+[ext_resource type="PackedScene" uid="uid://3a8r1nynk5vm" path="res://games/rps/screens/results/results.tscn" id="4_nokrr"]
 
 [node name="rps" type="Control"]
 layout_mode = 3
@@ -18,7 +19,12 @@ script = ExtResource("1_yjitw")
 [node name="options" parent="." instance=ExtResource("1_gimk2")]
 layout_mode = 1
 
-[node name="main" parent="." instance=ExtResource("3_ru1hn")]
+[node name="main" parent="." node_paths=PackedStringArray("results") instance=ExtResource("3_ru1hn")]
+visible = false
+layout_mode = 1
+results = NodePath("../results")
+
+[node name="results" parent="." instance=ExtResource("4_nokrr")]
 visible = false
 layout_mode = 1
 

@@ -6,11 +6,34 @@ extends Control
 	"hard" = {}
 }
 
-@export var gamemode_conifg: Dictionary = {
-	"first_to" = {},
-	"best_of" = {},
-	"survival" = {},
-	"endless" = {}
+@export var gamemode_config: Dictionary = {
+	"first_to" = {
+		"name" = "first_to",
+		"total_rounds" = "inf",
+		"max_score" = 3
+	},
+	"best_of" = {
+		"name" = "best_of",
+		"total_rounds" = 5
+	},
+	"survival" = {
+		"name" = "survival",
+		"total_rounds" = "inf"
+	},
+	"endless" = {
+		"name" = "endless",
+		"total_rounds" = "inf"
+	},
+	"comeback" = {
+		"name" = "comeback",
+		"total_rounds" = 8,
+		"max_score" = 7,
+		"starting_points" = 3
+	},
+	"no_repeat" = {
+		"name" = "no_repeat",
+		"total_rounds" = "inf"
+	},
 }
 
 var chosen_difficulty: String = "easy"
@@ -35,5 +58,5 @@ func _on_option_pressed(args: Array):
 func get_selected_options() -> Dictionary:
 	return {
 		difficulty = difficulty_config[chosen_difficulty], 
-		gamemode = gamemode_conifg[chosen_gamemode]
+		gamemode = gamemode_config[chosen_gamemode]
 	}
