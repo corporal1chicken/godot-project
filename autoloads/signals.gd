@@ -7,3 +7,6 @@ signal change_screen_from_pause(new_screen: String)
 
 signal game_paused()
 signal game_resumed()
+
+# Will change later
+signal set_controls(controls: String)

@@ -49,3 +49,7 @@ Pause whilst in RPS, timer stops. Can go back to the main menu or quit entirely.
 ---
 ### Commit 11: UI Change
 Changed the UI a bit. Nothing major, just some colour
+
+---
+### Commit 12: More UI changes
+Pause menu updated to be with the colour changes. Plays a slide out animation when opened/closed and blocks clicks on anything below it. Buttons are now duplicated in code by the game/difficulty configs so they don't need to be made manually. Controls option for the pause menu, which shows controls based on what screen you're on. 'H' to hide overlay (streak counter and rounds counter) in RPS. Tooltips for buttons as well.

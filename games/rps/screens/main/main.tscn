@@ -25,6 +25,48 @@ script = ExtResource("1_rrh38")
 ai = NodePath("ai")
 gamemode = NodePath("gamemode")
 
+[node name="overlay" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="streak" type="RichTextLabel" parent="overlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 17.0
+offset_right = -1131.0
+offset_bottom = -622.7495
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.0093395)
+theme_override_font_sizes/normal_font_size = 24
+text = "streak: 0
+best: 0"
+horizontal_alignment = 1
+
+[node name="rounds_played" type="RichTextLabel" parent="overlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1144.0
+offset_top = 15.0
+offset_right = -17.0
+offset_bottom = -627.72174
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.0093395)
+theme_override_font_sizes/normal_font_size = 24
+text = "round
+1/3"
+horizontal_alignment = 1
+
 [node name="moves" type="HBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 7
@@ -41,6 +83,7 @@ grow_vertical = 0
 
 [node name="rock" type="Button" parent="moves"]
 layout_mode = 2
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = ExtResource("3_vkrnm")
 theme_override_styles/pressed = ExtResource("4_g1e56")
@@ -52,6 +95,7 @@ text = " [1] Rock "
 
 [node name="paper" type="Button" parent="moves"]
 layout_mode = 2
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = ExtResource("3_vkrnm")
 theme_override_styles/pressed = ExtResource("4_g1e56")
@@ -63,6 +107,7 @@ text = " [2] Paper "
 
 [node name="scissors" type="Button" parent="moves"]
 layout_mode = 2
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = ExtResource("3_vkrnm")
 theme_override_styles/pressed = ExtResource("4_g1e56")
@@ -104,40 +149,6 @@ grow_vertical = 2
 scale = Vector2(1, 1.0093395)
 theme_override_font_sizes/normal_font_size = 64
 text = "time left: 5.0"
-horizontal_alignment = 1
-
-[node name="streak" type="RichTextLabel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 12.0
-offset_top = 17.0
-offset_right = -1131.0
-offset_bottom = -622.7495
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1, 1.0093395)
-theme_override_font_sizes/normal_font_size = 24
-text = "streak: 0
-best: 0"
-horizontal_alignment = 1
-
-[node name="rounds_played" type="RichTextLabel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1144.0
-offset_top = 15.0
-offset_right = -17.0
-offset_bottom = -627.72174
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1, 1.0093395)
-theme_override_font_sizes/normal_font_size = 24
-text = "round
-1/3"
 horizontal_alignment = 1
 
 [node name="score_count" type="RichTextLabel" parent="."]

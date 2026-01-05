@@ -1,6 +1,86 @@
-[gd_scene load_steps=2 format=3 uid="uid://uf1uqs7cnhpv"]
+[gd_scene load_steps=11 format=3 uid="uid://uf1uqs7cnhpv"]
 
 [ext_resource type="Script" uid="uid://csfofhvefrnol" path="res://pause_menu/pause_menu.gd" id="1_5hbt6"]
+[ext_resource type="FontFile" uid="uid://c52roshcextrd" path="res://fonts/jbmono.ttf" id="1_wn31l"]
+[ext_resource type="StyleBox" uid="uid://cpmnlgdr5ouix" path="res://resources/buttons/default.tres" id="3_b0obc"]
+[ext_resource type="StyleBox" uid="uid://bljd2cphfb61d" path="res://resources/buttons/pressed.tres" id="4_cux0y"]
+[ext_resource type="StyleBox" uid="uid://bae4da8nc584q" path="res://resources/buttons/hover.tres" id="5_teyq6"]
+[ext_resource type="StyleBox" uid="uid://mirppdjp070o" path="res://resources/buttons/focus.tres" id="6_p6csp"]
+
+[sub_resource type="Theme" id="Theme_1nv8k"]
+default_font = ExtResource("1_wn31l")
+
+[sub_resource type="Animation" id="Animation_wn31l"]
+resource_name = "inner_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("inner:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("inner:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(301, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_b0obc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("inner:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("inner:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-427, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cux0y"]
+_data = {
+&"RESET": SubResource("Animation_b0obc"),
+&"inner_out": SubResource("Animation_wn31l")
+}
 
 [node name="pause_menu" type="Control"]
 z_index = 100
@@ -8,63 +88,123 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -427.0
+offset_right = -427.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_1nv8k")
 script = ExtResource("1_5hbt6")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="inner" type="ColorRect" parent="."]
 layout_mode = 0
-offset_right = 414.0
-offset_bottom = 711.0
+offset_right = 414.00012
+offset_bottom = 722.0
+color = Color(0.14272717, 0.3932208, 0.6040728, 1)
 
-[node name="ColorRect2" type="ColorRect" parent="."]
+[node name="text_label" type="RichTextLabel" parent="inner"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 112.0
+offset_top = 14.0
+offset_right = 3.0
+offset_bottom = -14.477173
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.0093395)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 30
+text = "text goes here
+"
+vertical_alignment = 1
+
+[node name="outer" type="ColorRect" parent="."]
 layout_mode = 0
 offset_right = 402.0
 offset_bottom = 721.0
-color = Color(0.27022192, 0.27022192, 0.2702219, 1)
+color = Color(0.2492662, 0.5545923, 0.81615436, 1)
 
 [node name="title" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_top = 64.0
-offset_right = 402.0
-offset_bottom = 194.0
-theme_override_font_sizes/normal_font_size = 70
+offset_left = 1.0
+offset_top = 130.0
+offset_right = 403.0
+offset_bottom = 260.0
+theme_override_font_sizes/normal_font_size = 58
 bbcode_enabled = true
-text = "[center] pause
+text = "Game Paused
 "
+horizontal_alignment = 1
 
-[node name="gamemodes" type="VBoxContainer" parent="."]
+[node name="options" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 129.0
-offset_top = -140.0
-offset_right = 294.0
-offset_bottom = 198.0
+offset_left = 56.0
+offset_top = -125.0
+offset_right = 353.0
+offset_bottom = 213.0
 grow_vertical = 2
 scale = Vector2(1.0167471, 1)
 
-[node name="resume" type="Button" parent="gamemodes"]
+[node name="resume" type="Button" parent="options"]
 layout_mode = 2
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 32
-text = "resume"
+theme_override_styles/normal = ExtResource("3_b0obc")
+theme_override_styles/pressed = ExtResource("4_cux0y")
+theme_override_styles/hover = ExtResource("5_teyq6")
+theme_override_styles/focus = ExtResource("6_p6csp")
+text = "Resume"
 
-[node name="menu" type="Button" parent="gamemodes"]
+[node name="menu" type="Button" parent="options"]
 layout_mode = 2
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 32
-text = "menu"
+theme_override_styles/normal = ExtResource("3_b0obc")
+theme_override_styles/pressed = ExtResource("4_cux0y")
+theme_override_styles/hover = ExtResource("5_teyq6")
+theme_override_styles/focus = ExtResource("6_p6csp")
+text = "Menu"
 
-[node name="settings" type="Button" parent="gamemodes"]
+[node name="controls" type="Button" parent="options"]
 layout_mode = 2
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 32
-text = "settings"
+theme_override_styles/normal = ExtResource("3_b0obc")
+theme_override_styles/pressed = ExtResource("4_cux0y")
+theme_override_styles/hover = ExtResource("5_teyq6")
+theme_override_styles/focus = ExtResource("6_p6csp")
+text = "Controls"
 
-[node name="quit" type="Button" parent="gamemodes"]
+[node name="settings" type="Button" parent="options"]
 layout_mode = 2
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 32
-text = "quit"
+theme_override_styles/normal = ExtResource("3_b0obc")
+theme_override_styles/pressed = ExtResource("4_cux0y")
+theme_override_styles/hover = ExtResource("5_teyq6")
+theme_override_styles/focus = ExtResource("6_p6csp")
+text = "Settings"
 
-[connection signal="pressed" from="gamemodes/resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="gamemodes/menu" to="." method="_on_menu_pressed"]
-[connection signal="pressed" from="gamemodes/quit" to="." method="_on_quit_pressed"]
+[node name="quit" type="Button" parent="options"]
+layout_mode = 2
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("3_b0obc")
+theme_override_styles/pressed = ExtResource("4_cux0y")
+theme_override_styles/hover = ExtResource("5_teyq6")
+theme_override_styles/focus = ExtResource("6_p6csp")
+text = "Quit to Desktop"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_cux0y")
+}
+
+[connection signal="pressed" from="options/resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="options/menu" to="." method="_on_menu_pressed"]
+[connection signal="pressed" from="options/controls" to="." method="_on_controls_pressed"]
+[connection signal="pressed" from="options/quit" to="." method="_on_quit_pressed"]

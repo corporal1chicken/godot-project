@@ -81,6 +81,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			
 		_on_continue_pressed()
 		$continue.grab_focus()
+	elif event.is_action_pressed("rps_overlay"):
+		$overlay.visible = not$overlay.visible
 	
 	pass
 
@@ -115,8 +117,8 @@ func _determine_streak(outcome: String):
 	
 func _update_round_text():
 	$score_count.text = "player: %d | AI: %d" % [player_score, computer_score]
-	$streak.text = "streak: %d\nbest: %d" % [current_streak, best_streak]
-	$rounds_played.text = "round\n" + str(rounds_played) + "/" + str(gamemode_info.get("total_rounds"))
+	$overlay/streak.text = "streak: %d\nbest: %d" % [current_streak, best_streak]
+	$overlay/rounds_played.text = "round\n" + str(rounds_played) + "/" + str(gamemode_info.get("total_rounds"))
 	
 	pass
 	
@@ -201,6 +203,10 @@ func start_game(chosen_gamemode: Dictionary, chosen_difficulty: Dictionary):
 	_update_round_text()
 	_main_loop()
 	
+	Signals.set_controls.emit(
+		"controls:\n[1] Rock\n[2] Paper\n[3] Scissors\n[H] Overlay\n[Enter] Continue\n[Escape] Pause"
+	)
+	
 	pass
 	
 func _end_game(outcome_text: String):
@@ -221,6 +227,7 @@ func _end_game(outcome_text: String):
 	})
 	
 	Signals.change_sub_screen.emit("main", "results")
+	Signals.set_controls.emit("")
 	pass
 	
 func _main_loop():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ci3ebh5513arr"]
+[gd_scene load_steps=9 format=3 uid="uid://ci3ebh5513arr"]
 
 [ext_resource type="Script" uid="uid://bcxnhj6tmymrh" path="res://scenes/ui_contoller/ui_contoller.gd" id="1_l6k06"]
 [ext_resource type="PackedScene" uid="uid://bnccu2ow4wabv" path="res://scenes/main_menu/main_menu.tscn" id="2_64rpj"]
@@ -6,21 +6,60 @@
 [ext_resource type="PackedScene" uid="uid://cy83mypmppqyf" path="res://games/rps/rps.tscn" id="3_l2jjd"]
 [ext_resource type="PackedScene" uid="uid://uf1uqs7cnhpv" path="res://pause_menu/pause_menu.tscn" id="4_6q2om"]
 
+[sub_resource type="Animation" id="Animation_6q2om"]
+resource_name = "open_pause_menu"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("pause/pause_menu:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-417, 0), Vector2(-6, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_sshsc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("pause/pause_menu:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-417, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yfun5"]
+_data = {
+&"RESET": SubResource("Animation_sshsc"),
+&"open_pause_menu": SubResource("Animation_6q2om")
+}
+
 [node name="ui_contoller" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 2.0
+offset_right = 2.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l6k06")
 
 [node name="pause" type="CanvasLayer" parent="."]
-layer = 10
-visible = false
+layer = 0
 
 [node name="pause_menu" parent="pause" node_paths=PackedStringArray("ui_controller") instance=ExtResource("4_6q2om")]
 z_index = 0
+offset_left = -417.0
+offset_right = -417.0
 ui_controller = NodePath("../..")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -39,6 +78,11 @@ ui_controller = NodePath("../..")
 
 [node name="signals" type="Node" parent="."]
 script = ExtResource("3_64rpj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_yfun5")
+}
 
 [editable path="CanvasLayer/main_menu"]
 [editable path="CanvasLayer/main_menu/play_screen"]
