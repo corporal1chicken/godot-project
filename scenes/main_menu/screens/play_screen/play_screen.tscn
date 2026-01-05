@@ -1,4 +1,42 @@
-[gd_scene format=3 uid="uid://2loq2bltv74p"]
+[gd_scene load_steps=5 format=3 uid="uid://2loq2bltv74p"]
+
+[ext_resource type="FontFile" uid="uid://c52roshcextrd" path="res://fonts/jbmono.ttf" id="1_rnnix"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fjesc"]
+bg_color = Color(0.42546695, 0.6871253, 0.92491215, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qfl4u"]
+bg_color = Color(0.21568628, 0.5137255, 0.7647059, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rnnix"]
+bg_color = Color(0.21443778, 0.51364243, 0.76662093, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
 
 [node name="play_screen" type="Control"]
 layout_mode = 3
@@ -9,17 +47,24 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="play" type="Button" parent="."]
+z_index = 10
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -179.0
-offset_top = -48.0
-offset_right = 179.0
-offset_bottom = 48.0
+offset_left = -156.0
+offset_top = -39.0
+offset_right = 156.0
+offset_bottom = 57.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 32
-text = "play game"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 5
+theme_override_fonts/font = ExtResource("1_rnnix")
+theme_override_font_sizes/font_size = 45
+theme_override_styles/normal = SubResource("StyleBoxFlat_fjesc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_qfl4u")
+theme_override_styles/hover = SubResource("StyleBoxFlat_rnnix")
+text = "play"

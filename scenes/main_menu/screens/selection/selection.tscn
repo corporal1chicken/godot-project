@@ -1,6 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://d1mjebqhyvix2"]
+[gd_scene load_steps=7 format=3 uid="uid://d1mjebqhyvix2"]
 
 [ext_resource type="Script" uid="uid://ck0x16reexw87" path="res://scenes/main_menu/screens/selection/selection.gd" id="1_sr7xa"]
+[ext_resource type="FontFile" uid="uid://c52roshcextrd" path="res://fonts/jbmono.ttf" id="1_vcvpi"]
+[ext_resource type="StyleBox" uid="uid://cpmnlgdr5ouix" path="res://resources/buttons/default.tres" id="3_hrs7e"]
+[ext_resource type="StyleBox" uid="uid://bljd2cphfb61d" path="res://resources/buttons/pressed.tres" id="4_444s1"]
+[ext_resource type="StyleBox" uid="uid://bae4da8nc584q" path="res://resources/buttons/hover.tres" id="5_2wj8w"]
+
+[sub_resource type="Theme" id="Theme_444s1"]
+default_font = ExtResource("1_vcvpi")
 
 [node name="selection" type="Control"]
 layout_mode = 3
@@ -9,6 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_444s1")
 script = ExtResource("1_sr7xa")
 
 [node name="holder" type="VBoxContainer" parent="."]
@@ -25,14 +33,44 @@ offset_bottom = 169.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.0167471, 1)
+theme_override_constants/separation = 20
 alignment = 1
 
 [node name="game_selection" type="Button" parent="holder"]
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 32
-text = "game selection"
+theme_override_styles/normal = ExtResource("3_hrs7e")
+theme_override_styles/pressed = ExtResource("4_444s1")
+theme_override_styles/hover = ExtResource("5_2wj8w")
+text = "Game Selection"
 
 [node name="achievements" type="Button" parent="holder"]
+visible = false
 layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("3_hrs7e")
 text = "achievements"
+
+[node name="title" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -474.0
+offset_top = 36.0
+offset_right = 476.0
+offset_bottom = 132.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 70
+text = "Main Menu"
+horizontal_alignment = 1

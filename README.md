@@ -1,5 +1,8 @@
 # Godot Project
-Just a simple Godot project. No major goals or scope, made for fun.
+Just a simple Godot project. I have no major goals or scope for this, just something to show my progress learning Godot. 
+
+Everything was recorded. Project was started on the 1/1/26.
+YouTube Playlist (unlisted): https://www.youtube.com/playlist?list=PLWUHEaMTtDoGK_zPWCeyvtwJ3n01BQGWw
 
 ---
 ### Commit 1: Initial Commit
@@ -42,3 +45,7 @@ Completely rewritten so everything is clearer and less repeated code. Also added
 ---
 ### Commit 10: Pause Menu
 Pause whilst in RPS, timer stops. Can go back to the main menu or quit entirely. Also fixed 2 bugs where no repeat ending on the first round, and another where changing your move before round ended was added to the move counter on the result screen. Game gives a reason as to why it ended.
+
+---
+### Commit 11: UI Change
+Changed the UI a bit. Nothing major, just some colour

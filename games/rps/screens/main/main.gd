@@ -97,11 +97,6 @@ func _on_continue_pressed():
 		Signals.change_sub_screen.emit("main", "options")
 	
 	pass
-	
-func _on_quit_pressed():
-	Signals.change_sub_screen.emit("main", "options")
-	
-	pass
 
 # Helper Functions
 func _determine_streak(outcome: String):

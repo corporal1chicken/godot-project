@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://r40xf4jofr4q"]
+[gd_scene load_steps=8 format=3 uid="uid://r40xf4jofr4q"]
 
 [ext_resource type="Script" uid="uid://bxf0y1kdy812w" path="res://games/rps/screens/options/options.gd" id="1_h5ud6"]
+[ext_resource type="FontFile" uid="uid://c52roshcextrd" path="res://fonts/jbmono.ttf" id="1_qu6bq"]
+[ext_resource type="StyleBox" uid="uid://cpmnlgdr5ouix" path="res://resources/buttons/default.tres" id="3_7pfc7"]
+[ext_resource type="StyleBox" uid="uid://bljd2cphfb61d" path="res://resources/buttons/pressed.tres" id="4_p5u1t"]
+[ext_resource type="StyleBox" uid="uid://bae4da8nc584q" path="res://resources/buttons/hover.tres" id="5_jlsk3"]
+[ext_resource type="StyleBox" uid="uid://mirppdjp070o" path="res://resources/buttons/focus.tres" id="6_7pns4"]
+
+[sub_resource type="Theme" id="Theme_bslrp"]
+default_font = ExtResource("1_qu6bq")
 
 [node name="options" type="Control"]
 layout_mode = 3
@@ -9,6 +17,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_bslrp")
 script = ExtResource("1_h5ud6")
 difficulty_config = {
 &"easy": {
@@ -36,35 +45,64 @@ scale = Vector2(1.0167471, 1)
 
 [node name="best_of" type="Button" parent="gamemodes"]
 layout_mode = 2
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 32
-text = "best of 5
-"
+theme_override_styles/normal = ExtResource("3_7pfc7")
+theme_override_styles/pressed = ExtResource("4_p5u1t")
+theme_override_styles/hover = ExtResource("5_jlsk3")
+theme_override_styles/focus = ExtResource("6_7pns4")
+text = "Best of 5"
 
 [node name="first_to" type="Button" parent="gamemodes"]
 layout_mode = 2
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 32
-text = "first to 3
+theme_override_styles/normal = ExtResource("3_7pfc7")
+theme_override_styles/pressed = ExtResource("4_p5u1t")
+theme_override_styles/hover = ExtResource("5_jlsk3")
+theme_override_styles/focus = ExtResource("6_7pns4")
+text = "First to 3
 "
 
 [node name="survival" type="Button" parent="gamemodes"]
 layout_mode = 2
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 32
-text = "survival"
+theme_override_styles/normal = ExtResource("3_7pfc7")
+theme_override_styles/pressed = ExtResource("4_p5u1t")
+theme_override_styles/hover = ExtResource("5_jlsk3")
+theme_override_styles/focus = ExtResource("6_7pns4")
+text = "Survival"
 
 [node name="comeback" type="Button" parent="gamemodes"]
 layout_mode = 2
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 32
-text = "comeback"
+theme_override_styles/normal = ExtResource("3_7pfc7")
+theme_override_styles/pressed = ExtResource("4_p5u1t")
+theme_override_styles/hover = ExtResource("5_jlsk3")
+theme_override_styles/focus = ExtResource("6_7pns4")
+text = "Comeback"
 
 [node name="no_repeat" type="Button" parent="gamemodes"]
 layout_mode = 2
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 32
-text = "no repeat"
+theme_override_styles/normal = ExtResource("3_7pfc7")
+theme_override_styles/pressed = ExtResource("4_p5u1t")
+theme_override_styles/hover = ExtResource("5_jlsk3")
+theme_override_styles/focus = ExtResource("6_7pns4")
+text = "No Repeat"
 
 [node name="endless" type="Button" parent="gamemodes"]
 layout_mode = 2
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 32
-text = "endless
+theme_override_styles/normal = ExtResource("3_7pfc7")
+theme_override_styles/pressed = ExtResource("4_p5u1t")
+theme_override_styles/hover = ExtResource("5_jlsk3")
+theme_override_styles/focus = ExtResource("6_7pns4")
+text = "Endless
 "
 
 [node name="difficulties" type="VBoxContainer" parent="."]
@@ -81,20 +119,35 @@ scale = Vector2(1.0167471, 1)
 
 [node name="easy" type="Button" parent="difficulties"]
 layout_mode = 2
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 32
-text = "easy
+theme_override_styles/normal = ExtResource("3_7pfc7")
+theme_override_styles/pressed = ExtResource("4_p5u1t")
+theme_override_styles/hover = ExtResource("5_jlsk3")
+theme_override_styles/focus = ExtResource("6_7pns4")
+text = "Easy
 "
 
 [node name="medium" type="Button" parent="difficulties"]
 layout_mode = 2
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 32
-text = "medium
+theme_override_styles/normal = ExtResource("3_7pfc7")
+theme_override_styles/pressed = ExtResource("4_p5u1t")
+theme_override_styles/hover = ExtResource("5_jlsk3")
+theme_override_styles/focus = ExtResource("6_7pns4")
+text = "Medium
 "
 
 [node name="hard" type="Button" parent="difficulties"]
 layout_mode = 2
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 32
-text = "hard
+theme_override_styles/normal = ExtResource("3_7pfc7")
+theme_override_styles/pressed = ExtResource("4_p5u1t")
+theme_override_styles/hover = ExtResource("5_jlsk3")
+theme_override_styles/focus = ExtResource("6_7pns4")
+text = "Hard
 "
 
 [node name="start" type="Button" parent="."]
@@ -104,12 +157,18 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 349.99994
-offset_top = 262.00006
-offset_right = 708.0
-offset_bottom = 358.00006
+offset_left = 346.99994
+offset_top = 265.0
+offset_right = 705.0
+offset_bottom = 361.0
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.76, 0.8399988)
-theme_override_font_sizes/font_size = 24
-text = "start endless (easy)"
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = ExtResource("3_7pfc7")
+theme_override_styles/pressed = ExtResource("4_p5u1t")
+theme_override_styles/hover = ExtResource("5_jlsk3")
+theme_override_styles/focus = ExtResource("6_7pns4")
+text = "Start endless (easy)"
+autowrap_mode = 3

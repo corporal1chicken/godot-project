@@ -1,8 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://brj0pxw043y7c"]
+[gd_scene load_steps=11 format=3 uid="uid://brj0pxw043y7c"]
 
+[ext_resource type="FontFile" uid="uid://c52roshcextrd" path="res://fonts/jbmono.ttf" id="1_21jpu"]
 [ext_resource type="Script" uid="uid://ddrt78p8a5ym6" path="res://games/rps/screens/main/main.gd" id="1_rrh38"]
 [ext_resource type="Script" uid="uid://b8aoyub3tolfp" path="res://games/rps/helpers/ai.gd" id="2_08fky"]
 [ext_resource type="Script" uid="uid://12pc3pyitl5c" path="res://games/rps/helpers/gamemode.gd" id="3_ly3r3"]
+[ext_resource type="StyleBox" uid="uid://cpmnlgdr5ouix" path="res://resources/buttons/default.tres" id="3_vkrnm"]
+[ext_resource type="StyleBox" uid="uid://bljd2cphfb61d" path="res://resources/buttons/pressed.tres" id="4_g1e56"]
+[ext_resource type="StyleBox" uid="uid://bae4da8nc584q" path="res://resources/buttons/hover.tres" id="5_a2agg"]
+[ext_resource type="StyleBox" uid="uid://c7px3fhbbmpwa" path="res://resources/buttons/disabled.tres" id="6_hgfv1"]
+[ext_resource type="StyleBox" uid="uid://mirppdjp070o" path="res://resources/buttons/focus.tres" id="7_w4fab"]
+
+[sub_resource type="Theme" id="Theme_syy7l"]
+default_font = ExtResource("1_21jpu")
 
 [node name="main" type="Control" node_paths=PackedStringArray("ai", "gamemode")]
 layout_mode = 3
@@ -11,6 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_syy7l")
 script = ExtResource("1_rrh38")
 ai = NodePath("ai")
 gamemode = NodePath("gamemode")
@@ -32,23 +42,35 @@ grow_vertical = 0
 [node name="rock" type="Button" parent="moves"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("3_vkrnm")
+theme_override_styles/pressed = ExtResource("4_g1e56")
+theme_override_styles/hover = ExtResource("5_a2agg")
+theme_override_styles/disabled = ExtResource("6_hgfv1")
+theme_override_styles/focus = ExtResource("7_w4fab")
 disabled = true
-text = "(1) rock
-"
+text = " [1] Rock "
 
 [node name="paper" type="Button" parent="moves"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("3_vkrnm")
+theme_override_styles/pressed = ExtResource("4_g1e56")
+theme_override_styles/hover = ExtResource("5_a2agg")
+theme_override_styles/disabled = ExtResource("6_hgfv1")
+theme_override_styles/focus = ExtResource("7_w4fab")
 disabled = true
-text = "(2) paper
-"
+text = " [2] Paper "
 
 [node name="scissors" type="Button" parent="moves"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("3_vkrnm")
+theme_override_styles/pressed = ExtResource("4_g1e56")
+theme_override_styles/hover = ExtResource("5_a2agg")
+theme_override_styles/disabled = ExtResource("6_hgfv1")
+theme_override_styles/focus = ExtResource("7_w4fab")
 disabled = true
-text = "(3) scissors
-"
+text = " [3] Scissors "
 
 [node name="continue" type="Button" parent="."]
 visible = false
@@ -67,23 +89,6 @@ grow_vertical = 2
 scale = Vector2(0.76, 0.8399988)
 theme_override_font_sizes/font_size = 24
 text = "continue"
-
-[node name="quit" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -629.0
-offset_top = 262.00006
-offset_right = -270.99994
-offset_bottom = 358.00006
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.76, 0.8399988)
-theme_override_font_sizes/font_size = 24
-text = "quit"
 
 [node name="time_left" type="RichTextLabel" parent="."]
 layout_mode = 1
@@ -108,8 +113,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 12.0
 offset_top = 17.0
-offset_right = -1149.0
-offset_bottom = -625.72174
+offset_right = -1131.0
+offset_bottom = -622.7495
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1, 1.0093395)
@@ -197,4 +202,3 @@ script = ExtResource("2_08fky")
 script = ExtResource("3_ly3r3")
 
 [connection signal="pressed" from="continue" to="." method="_on_continue_pressed"]
-[connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]
