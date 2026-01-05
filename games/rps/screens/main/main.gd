@@ -42,6 +42,9 @@ var game_ended = false
 
 # Godot Specific Functions
 func _ready() -> void:
+	Signals.game_paused.connect(_on_game_paused)
+	Signals.game_resumed.connect(_on_game_resumed)
+	
 	for child in $moves.get_children():
 		child.pressed.connect(_on_move_pressed.bind(child.name))
 		
@@ -84,7 +87,6 @@ func _unhandled_input(event: InputEvent) -> void:
 # On Button Press Functions
 func _on_move_pressed(move: String):
 	player_move = move
-	played_moves[move] = played_moves.get(move) + 1
 	
 	pass
 	
@@ -170,6 +172,9 @@ func _end_round():
 	
 	rounds_played += 1
 	
+	if player_move != "":		
+		played_moves[player_move] = played_moves.get(player_move) + 1
+	
 	_update_round_text()
 	
 	pass
@@ -203,7 +208,7 @@ func start_game(chosen_gamemode: Dictionary, chosen_difficulty: Dictionary):
 	
 	pass
 	
-func _end_game():
+func _end_game(outcome_text: String):
 	_toggle_moves_button(true)
 	
 	game_ended = true
@@ -217,6 +222,7 @@ func _end_game():
 		"streak" = current_streak,
 		"best_streak" = best_streak,
 		"played_moves" = played_moves,
+		"outcome_text" = outcome_text
 	})
 	
 	Signals.change_sub_screen.emit("main", "results")
@@ -241,7 +247,16 @@ func _main_loop():
 		"player_move" = player_move
 	}
 	
-	if gamemode.check_rules(state):
-		_end_game()
+	var should_end_game: Array = gamemode.check_rules(state)
+	
+	if should_end_game[0]:
+		_end_game(should_end_game[1])
 	
 	pass
+
+# Signal Connections
+func _on_game_paused():
+	timer.paused = true
+
+func _on_game_resumed():
+	timer.paused = false

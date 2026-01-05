@@ -38,3 +38,7 @@ Completely rewritten so everything is clearer and less repeated code. Also added
 ---
 ### Commit 9: Gameplay Stuff
 2 more gamemodes, comeback and no repeat. Comback has a max of 8 rounds and the AI starts on 3 points. No repeat doesn't let you play the same move twice. Dedicated results screen which shows more information such as how many times you played each move, total playtime. Also able to click 'enter' to go the next round (similar to 1/2/3 for the moves). Also tracks player history and AI set up.
+
+---
+### Commit 10: Pause Menu
+Pause whilst in RPS, timer stops. Can go back to the main menu or quit entirely. Also fixed 2 bugs where no repeat ending on the first round, and another where changing your move before round ended was added to the move counter on the result screen. Game gives a reason as to why it ended.

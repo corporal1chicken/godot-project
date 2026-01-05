@@ -17,4 +17,5 @@ func set_results_screen(information: Dictionary):
 		information.played_moves.paper,
 		information.played_moves.scissors
 	]
+	$outcome_text.text = information.outcome_text
 	pass

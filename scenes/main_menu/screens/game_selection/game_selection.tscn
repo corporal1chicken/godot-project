@@ -57,3 +57,5 @@ scale = Vector2(0.76, 0.8399988)
 theme_override_font_sizes/font_size = 24
 disabled = true
 text = "select a game!"
+
+[connection signal="pressed" from="confirm" to="." method="_on_confirm_pressed"]

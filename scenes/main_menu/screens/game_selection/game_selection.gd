@@ -10,6 +10,10 @@ func _ready() -> void:
 	for child in $games.get_children():
 		child.pressed.connect(_on_game_pressed.bind(child.name))
 
+func _on_confirm_pressed():
+	if avaliable_games.has(selected_game):
+		Signals.change_screen.emit("main_menu", selected_game)
+
 func _on_game_pressed(game_name: String):
 	selected_game = game_name
 	$confirm.text = "continue with " + selected_game

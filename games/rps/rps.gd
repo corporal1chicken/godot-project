@@ -1,5 +1,7 @@
 extends Control
 
+@export var ui_controller: Control
+
 @onready var options: Control = $options
 @onready var main: Control = $main
 
@@ -15,6 +17,8 @@ func _on_start_pressed():
 	main.start_game(result.gamemode, result.difficulty)
 
 func _change_sub_screen(old_screen: String, new_screen: String):
+	if ui_controller.current_screen != self.name: return
+	
 	var old_child: Control = get_node(old_screen)
 	var new_child: Control = get_node(new_screen)
 	
