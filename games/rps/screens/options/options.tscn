@@ -45,6 +45,18 @@ theme_override_styles/hover = ExtResource("5_jlsk3")
 theme_override_styles/focus = ExtResource("6_7pns4")
 text = "template"
 
+[node name="modifiers" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 433.0
+offset_top = -83.0
+offset_right = 591.0
+offset_bottom = 84.0
+grow_vertical = 2
+scale = Vector2(1.0167471, 1)
+
 [node name="difficulties" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 4

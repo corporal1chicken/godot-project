@@ -53,3 +53,7 @@ Changed the UI a bit. Nothing major, just some colour
 ---
 ### Commit 12: More UI changes
 Pause menu updated to be with the colour changes. Plays a slide out animation when opened/closed and blocks clicks on anything below it. Buttons are now duplicated in code by the game/difficulty configs so they don't need to be made manually. Controls option for the pause menu, which shows controls based on what screen you're on. 'H' to hide overlay (streak counter and rounds counter) in RPS. Tooltips for buttons as well.
+
+---
+### Commit 13: RPS Modifiers
+3 modifiers that can be selected in RPS. Lock input doesn't allow move switching, on edge gives every draw a 50% chance to lose 1 point and double points for 2x points which stacks with gamemodes. Also changed gamemode.gd slightly. Changed main.gd to be less dependant of gamemode/difficulty dictionaries and now get everything from a single game_stats dictionary that is edited by gamemode.gd.

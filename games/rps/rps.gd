@@ -14,7 +14,7 @@ func _on_start_pressed():
 	
 	var result = options.get_selected_options()
 	
-	main.start_game(result.gamemode, result.difficulty)
+	main.start_game(result.gamemode, result.difficulty, result.modifier)
 
 func _change_sub_screen(old_screen: String, new_screen: String):
 	if ui_controller.current_screen != self.name: return

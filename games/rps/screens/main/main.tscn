@@ -208,6 +208,7 @@ one_shot = true
 
 [node name="ai" type="Node" parent="."]
 script = ExtResource("2_08fky")
+test_mode = true
 
 [node name="gamemode" type="Node" parent="."]
 script = ExtResource("3_ly3r3")
