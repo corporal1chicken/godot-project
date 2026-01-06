@@ -57,3 +57,7 @@ Pause menu updated to be with the colour changes. Plays a slide out animation wh
 ---
 ### Commit 13: RPS Modifiers
 3 modifiers that can be selected in RPS. Lock input doesn't allow move switching, on edge gives every draw a 50% chance to lose 1 point and double points for 2x points which stacks with gamemodes. Also changed gamemode.gd slightly. Changed main.gd to be less dependant of gamemode/difficulty dictionaries and now get everything from a single game_stats dictionary that is edited by gamemode.gd.
+
+---
+### Commit 14: Bugs fixes
+Fixed a ton of bugs including some gamemodes ending on the first round, results screen being broken, pause menu control screen staying open when the menu is closed, more UI changes, text formatting for game end reasons and not selecting a modifier caused a runtime error. Also added to the RPS overlay details on what gamemode, difficulty and modifier you have. Readded the quit button (that I for some reason removed).

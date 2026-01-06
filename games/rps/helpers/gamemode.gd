@@ -5,7 +5,7 @@ extends Node
 # i.e. comeback_start() that sets AI points to 3
 
 var gamemode_info: Dictionary
-var modifier_info: Dictionary
+var modifier_info
 
 func _gamemode_edit(game_stats: Dictionary):
 	if gamemode_info.get("starting_points"):
@@ -20,12 +20,13 @@ func _gamemode_edit(game_stats: Dictionary):
 	return game_stats
 	
 func _modifier_edit(game_stats: Dictionary):
-	var key = modifier_info.get("key")
-	
-	if key == "double_points":
-		game_stats.points_on_win *= 2
-	elif key == "lock_input":
-		game_stats["lock_input"] = true
+	if modifier_info != null:
+		var key = modifier_info.get("key")
+		
+		if key == "double_points":
+			game_stats.points_on_win *= 2
+		elif key == "lock_input":
+			game_stats["lock_input"] = true
 	
 	return game_stats
 
@@ -37,7 +38,7 @@ func edit_game_stats(default_game_stats: Dictionary) -> Dictionary:
 	
 	return modifier_edit_stats
 
-func set_game_info(gamemode: Dictionary, modifier: Dictionary):
+func set_game_info(gamemode: Dictionary, modifier):
 	gamemode_info = gamemode
 	modifier_info = modifier
 
@@ -45,21 +46,21 @@ func check_rules(state: Dictionary) -> Array:
 	
 	if gamemode_info.key == "best_of":
 		if state.rounds_played == gamemode_info.total_rounds:
-			return [true, "all rounds played"]
+			return [true, "Max rounds played!"]
 	elif gamemode_info.key == "first_to":
 		if state.player_score == gamemode_info.max_score or state.computer_score == gamemode_info.max_score:
-			return [true, "max score was reached"]
+			return [true, ("%s reached %d points!" % ["You" if state.player_score > state.computer_score else "AI", gamemode_info.max_score])]
 	elif gamemode_info.key == "survival":
 		if state.current_streak == 0 and state.rounds_played != 0:
-			return [true, "streak lost"]
+			return [true, ("You lost your %d streak!" % [state.current_streak])]
 	elif gamemode_info.key == "comeback":
 		if state.rounds_played == gamemode_info.total_rounds:
-			return [true, "all rounds played"]
+			return [true, "Max rounds played"]
 		else:
 			if state.computer_score == gamemode_info.max_score:
 				return [true, "AI got 7 points"]
 	elif gamemode_info.key == "no_repeat":
 		if state.rounds_played > 1 and state.player_move == state.player_history[-2]:
-			return [true, "played the same move"]
+			return [true, ("You played %s twice in a row!" % [state.player_move])]
 			
 	return [false, ""]

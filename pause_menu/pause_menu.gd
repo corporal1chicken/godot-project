@@ -23,7 +23,8 @@ func _on_menu_pressed():
 	pass
 	
 func _on_controls_pressed():
-	if animation_player.is_playing(): return
+	if animation_player.is_playing():
+		await animation_player.animation_finished
 	
 	if is_inner_out:
 		animation_player.play_backwards("inner_out")

@@ -1,14 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://3a8r1nynk5vm"]
+[gd_scene load_steps=7 format=3 uid="uid://3a8r1nynk5vm"]
 
+[ext_resource type="Theme" uid="uid://bevx2sxm3w6n2" path="res://resources/control.tres" id="1_3af8t"]
 [ext_resource type="Script" uid="uid://df8f1soqrcgcu" path="res://games/rps/screens/results/results.gd" id="1_n0b7d"]
+[ext_resource type="StyleBox" uid="uid://cpmnlgdr5ouix" path="res://resources/buttons/default.tres" id="3_ti5yl"]
+[ext_resource type="StyleBox" uid="uid://bljd2cphfb61d" path="res://resources/buttons/pressed.tres" id="4_h7mps"]
+[ext_resource type="StyleBox" uid="uid://bae4da8nc584q" path="res://resources/buttons/hover.tres" id="5_lhaai"]
+[ext_resource type="StyleBox" uid="uid://mirppdjp070o" path="res://resources/buttons/focus.tres" id="6_yancr"]
 
 [node name="results" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 1.0
+offset_right = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_3af8t")
 script = ExtResource("1_n0b7d")
 
 [node name="return" type="Button" parent="."]
@@ -25,23 +33,122 @@ offset_bottom = 358.00006
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.76, 0.8399988)
-theme_override_font_sizes/font_size = 24
-text = "return"
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = ExtResource("3_ti5yl")
+theme_override_styles/pressed = ExtResource("4_h7mps")
+theme_override_styles/hover = ExtResource("5_lhaai")
+theme_override_styles/focus = ExtResource("6_yancr")
+text = "Return"
 
 [node name="game_length" type="RichTextLabel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -2.0
+offset_left = 182.0
 offset_top = 157.0
-offset_right = -2.0
-offset_bottom = -492.65695
+offset_right = -186.0
+offset_bottom = -505.53668
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1, 1.0093395)
-theme_override_font_sizes/normal_font_size = 46
-text = "game length: 32"
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 35
+theme_override_styles/normal = ExtResource("3_ti5yl")
+text = " [Game Length]: 	10:00"
+vertical_alignment = 1
+
+[node name="score" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 182.0
+offset_top = 220.0
+offset_right = -186.0
+offset_bottom = -442.53668
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.0093395)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 35
+theme_override_styles/normal = ExtResource("3_ti5yl")
+text = " [Score]: 			Player (1) | AI (1)
+"
+vertical_alignment = 1
+
+[node name="rounds_played" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 182.0
+offset_top = 283.0
+offset_right = -186.0
+offset_bottom = -379.53668
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.0093395)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 35
+theme_override_styles/normal = ExtResource("3_ti5yl")
+text = " [Rounds Played]: 	5"
+vertical_alignment = 1
+
+[node name="streak" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 182.0
+offset_top = 346.0
+offset_right = -186.0
+offset_bottom = -316.53668
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.0093395)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 35
+theme_override_styles/normal = ExtResource("3_ti5yl")
+text = " [Streak]:			1 (Best: 1)"
+vertical_alignment = 1
+
+[node name="played_moves" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 182.0
+offset_top = 409.0
+offset_right = -186.0
+offset_bottom = -253.53668
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.0093395)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 22
+theme_override_styles/normal = ExtResource("3_ti5yl")
+text = " [Played Moves]:			    Rock (1) | Paper (1) | Scissors (1)"
+vertical_alignment = 1
+
+[node name="game_length6" type="RichTextLabel" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 182.0
+offset_top = 472.0
+offset_right = -186.0
+offset_bottom = -190.53668
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.0093395)
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 42
+theme_override_styles/normal = ExtResource("3_ti5yl")
+text = "Game Length: 10:00"
 horizontal_alignment = 1
 
 [node name="outcome_text" type="RichTextLabel" parent="."]
@@ -58,70 +165,6 @@ grow_vertical = 2
 scale = Vector2(1, 1.0093395)
 theme_override_font_sizes/normal_font_size = 46
 text = "lose text"
-horizontal_alignment = 1
-
-[node name="score" type="RichTextLabel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -2.0
-offset_top = 217.00002
-offset_right = -2.0
-offset_bottom = -432.65692
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1, 1.0093395)
-theme_override_font_sizes/normal_font_size = 46
-text = "score: [4] player | [1] AI | [2] draws"
-horizontal_alignment = 1
-
-[node name="rounds_played" type="RichTextLabel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -2.0
-offset_top = 281.0
-offset_right = -2.0
-offset_bottom = -368.65695
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1, 1.0093395)
-theme_override_font_sizes/normal_font_size = 46
-text = "rounds played: 1"
-horizontal_alignment = 1
-
-[node name="streak" type="RichTextLabel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -2.0
-offset_top = 341.0
-offset_right = -2.0
-offset_bottom = -308.65692
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1, 1.0093395)
-theme_override_font_sizes/normal_font_size = 46
-text = "streak: 1 | best: 4"
-horizontal_alignment = 1
-
-[node name="played_moves" type="RichTextLabel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -2.0
-offset_top = 399.0
-offset_right = -2.0
-offset_bottom = -250.65692
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1, 1.0093395)
-theme_override_font_sizes/normal_font_size = 46
-text = "played: rock (3) | paper (2) | scissors (4)"
 horizontal_alignment = 1
 
 [connection signal="pressed" from="return" to="." method="_on_return_pressed"]

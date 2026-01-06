@@ -16,7 +16,7 @@ func _on_confirm_pressed():
 
 func _on_game_pressed(game_name: String):
 	selected_game = game_name
-	$confirm.text = "continue with " + selected_game
+	$confirm.text = "Continue with " + selected_game
 	
 	if selected_game != "":
 		$confirm.disabled = false

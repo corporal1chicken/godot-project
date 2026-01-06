@@ -106,11 +106,13 @@ func _on_move_pressed(move: String):
 	pass
 	
 func _on_continue_pressed():
-	if not game_ended:
-		_main_loop()
-	else:
-		Signals.change_sub_screen.emit("main", "options")
+	_main_loop()
 	
+	pass
+	
+func _on_quit_pressed():
+	Signals.change_sub_screen.emit("main", "options")
+	_end_game("", false)
 	pass
 
 # Helper Functions
@@ -200,10 +202,12 @@ func _end_round():
 	
 	pass
 	
-func start_game(chosen_gamemode: Dictionary, chosen_difficulty: Dictionary, chosen_modifier: Dictionary):
+func start_game(chosen_gamemode: Dictionary, chosen_difficulty: Dictionary, chosen_modifier):
 	gamemode_info = chosen_gamemode
 	difficulty_info = chosen_difficulty
-	modifier_info = chosen_modifier
+	
+	if chosen_modifier != null:
+		modifier_info = chosen_modifier
 	
 	gamemode.set_game_info(chosen_gamemode, chosen_modifier)
 	game_stats = gamemode.edit_game_stats(default_game_stats)
@@ -215,16 +219,23 @@ func start_game(chosen_gamemode: Dictionary, chosen_difficulty: Dictionary, chos
 		"controls:\n[1] Rock\n[2] Paper\n[3] Scissors\n[H] Overlay\n[Enter] Continue\n[Escape] Pause"
 	)
 	
+	$overlay/currently_playing.text = "Difficulty: %s\nGamemode: %s\nModifier: %s" % [
+		chosen_difficulty.get("text"),
+		chosen_gamemode.get("text"),
+		chosen_modifier.get("text") if chosen_modifier != null else "None"
+	]
+	
 	pass
 	
-func _end_game(outcome_text: String):
+func _end_game(outcome_text: String, show_results: bool):
 	_toggle_moves_button(true)
 	
 	game_ended = true
 	
-	#results.set_results_screen(game_stats)
-	
-	Signals.change_sub_screen.emit("main", "results")
+	if show_results:
+		results.set_results_screen(game_stats, outcome_text)
+		Signals.change_sub_screen.emit("main", "results")
+		
 	Signals.set_controls.emit("")
 	pass
 	
@@ -241,7 +252,7 @@ func _main_loop():
 	var should_end_game: Array = gamemode.check_rules(game_stats)
 	
 	if should_end_game[0]:
-		_end_game(should_end_game[1])
+		_end_game(should_end_game[1], true)
 	
 	pass
 

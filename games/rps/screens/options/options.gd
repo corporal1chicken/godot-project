@@ -84,7 +84,7 @@ extends Control
 
 var chosen_difficulty: String = "easy"
 var chosen_gamemode: String = "endless"
-var chosen_modifier: String = "None"
+var chosen_modifier: String = ""
 
 func _ready() -> void:
 	for key in gamemode_config.keys():
@@ -144,5 +144,5 @@ func get_selected_options() -> Dictionary:
 	return {
 		difficulty = difficulty_config[chosen_difficulty], 
 		gamemode = gamemode_config[chosen_gamemode],
-		modifier = modifier_config[chosen_modifier]
+		modifier = modifier_config[chosen_modifier] if chosen_modifier != "" else null
 	}
