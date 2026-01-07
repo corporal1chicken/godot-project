@@ -61,3 +61,7 @@ Pause menu updated to be with the colour changes. Plays a slide out animation wh
 ---
 ### Commit 14: Bugs fixes
 Fixed a ton of bugs including some gamemodes ending on the first round, results screen being broken, pause menu control screen staying open when the menu is closed, more UI changes, text formatting for game end reasons and not selecting a modifier caused a runtime error. Also added to the RPS overlay details on what gamemode, difficulty and modifier you have. Readded the quit button (that I for some reason removed).
+
+---
+### Commit 15: Small Refactor
+Rewrote gamemode.gd to be less "if/elif" block. main.gd also only relies on game_stats as opposed to 3 separate dictionaries for difficulty/gamemode/modifier. Also added 3 more modifiers, false sense discards your first loss. Shrinking time decreases the timer by 0.2s down to 1s every round. Fair game gives the AI 1 point every 3 rounds. Also able to deselect modifiers.

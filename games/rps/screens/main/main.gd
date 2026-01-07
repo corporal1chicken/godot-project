@@ -1,8 +1,5 @@
 extends Control
 
-# Could have a retrieve_information so gamemode_info and difficulty_info
-# are no longer needed here
-
 @export var ai: Node
 @export var results: Node
 @export var gamemode: Node
@@ -25,6 +22,7 @@ var default_game_stats = {
 	player_history = [],
 	
 	draws = 0,
+	losses = 0,
 	current_streak = 0,
 	best_streak = 0,
 	
@@ -37,14 +35,15 @@ var default_game_stats = {
 	points_on_win = 1,
 	points_on_loss = 1,
 	rounds_played = 0,
-	total_playtime = 0.0
+	max_rounds = "inf",
+	total_playtime = 0.0,
+	override_timer_length = false,
+	new_timer_length = 5.0,
+	
+	modifiers_active = []
 }
 
 var game_stats: Dictionary
-
-var gamemode_info: Dictionary
-var difficulty_info: Dictionary
-var modifier_info: Dictionary
 
 var game_ended = false
 
@@ -92,7 +91,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		_on_continue_pressed()
 		$continue.grab_focus()
 	elif event.is_action_pressed("rps_overlay"):
-		$overlay.visible = not$overlay.visible
+		$overlay.visible = not $overlay.visible
 	
 	pass
 
@@ -100,20 +99,15 @@ func _unhandled_input(event: InputEvent) -> void:
 func _on_move_pressed(move: String):
 	game_stats.player_move = move
 	
-	if game_stats.get("lock_input"):
+	if game_stats.modifiers_active.has("lock_input"):
 		_toggle_moves_button(true)
-	
-	pass
 	
 func _on_continue_pressed():
 	_main_loop()
 	
-	pass
-	
 func _on_quit_pressed():
 	Signals.change_sub_screen.emit("main", "options")
 	_end_game("", false)
-	pass
 
 # Helper Functions
 func _determine_streak(outcome: String):
@@ -127,27 +121,21 @@ func _determine_streak(outcome: String):
 			game_stats.best_streak = game_stats.current_streak
 			
 		game_stats.current_streak = 0
-		
-	pass
 	
 func _update_round_text():
 	$score_count.text = "player: %d | AI: %d" % [game_stats.player_score, game_stats.computer_score]
 	$overlay/streak.text = "streak: %d\nbest: %d" % [game_stats.current_streak, game_stats.best_streak]
-	$overlay/rounds_played.text = "round\n" + str(game_stats.rounds_played) + "/" + str(gamemode_info.get("total_rounds"))
-	
-	pass
+	$overlay/rounds_played.text = "round\n" + str(game_stats.rounds_played) + "/" + str(game_stats.max_rounds)
 	
 func _get_winner():
 	if game_stats.player_move == "":
-		$round_end.text = "you didn't pick a move [-1 to you, +1 to AI]"
+		$round_end.text = "You didn't pick a move. [-1 to you, +1 to AI]"
 		game_stats.computer_score += game_stats.points_on_win
 		game_stats.player_score -= game_stats.points_on_loss
 	elif game_stats.player_move == game_stats.computer_move:
 		game_stats.draws += 1
-		
-		# Not happy with referencing modifier_info here, will likely change
-		# to a "check_rules" in gamemode.gd for both gamemode and modifiers
-		if modifier_info.get("key") == "on_edge":
+
+		if game_stats.modifiers_active.has("on_edge"):
 			if randf() < 0.5:
 				$round_end.text = "Draw but you got On Edge Modifier! [-1 to you]"
 				game_stats.player_score -= 1
@@ -161,9 +149,20 @@ func _get_winner():
 		game_stats.player_score += game_stats.points_on_win
 		_determine_streak("win")
 	else:
-		$round_end.text = "you lose! " + game_stats.computer_move + " beats " + game_stats.player_move + ". [+1 to AI]"
-		game_stats.computer_score += game_stats.points_on_loss
-		_determine_streak("loss")
+		if game_stats.modifiers_active.has("fair_game"):
+			if game_stats.rounds_played > 0 and game_stats.rounds_played % 3 == 0:
+				$round_end.text = "You lost but you have Fair Game active! [+%d, +1 additional to AI]" % [game_stats.points_on_loss]
+				game_stats.computer_score += (game_stats.points_on_loss + 1)
+				game_stats.losses += 1
+				_determine_streak("loss")
+		elif game_stats.modifiers_active.has("false_sense"):
+			$round_end.text = "You lost, but you have False Sense active! Loss not counted."
+			game_stats.modifiers_active.erase("false_sense")
+		else:
+			$round_end.text = "You lost! [+%d to AI]" % [game_stats.points_on_loss]
+			game_stats.computer_score += game_stats.points_on_loss
+			game_stats.losses += 1
+			_determine_streak("loss")
 	
 	if game_stats.player_move != "":
 		game_stats.player_history.append(game_stats.player_move)
@@ -187,31 +186,29 @@ func _start_round():
 	pass
 
 func _end_round():
+	game_stats.rounds_played += 1
+	
 	_get_winner()
 	_toggle_moves_button(true)
 	
 	$continue.visible = true
 	$round_end.visible = true
 	
-	game_stats.rounds_played += 1
-	
 	if game_stats.player_move != "":		
 		game_stats.played_moves[game_stats.player_move] = game_stats.played_moves.get(game_stats.player_move) + 1
+	
+	if game_stats.modifiers_active.has("less_time"):
+		if game_stats.timer_length != 1:		
+			game_stats.timer_length -= 0.2
 	
 	_update_round_text()
 	
 	pass
 	
 func start_game(chosen_gamemode: Dictionary, chosen_difficulty: Dictionary, chosen_modifier):
-	gamemode_info = chosen_gamemode
-	difficulty_info = chosen_difficulty
 	
-	if chosen_modifier != null:
-		modifier_info = chosen_modifier
-	
-	gamemode.set_game_info(chosen_gamemode, chosen_modifier)
-	game_stats = gamemode.edit_game_stats(default_game_stats)
-	
+	game_stats = gamemode.setup_game(default_game_stats, chosen_gamemode, chosen_modifier, chosen_difficulty)
+
 	_update_round_text()
 	_main_loop()
 	
@@ -242,9 +239,9 @@ func _end_game(outcome_text: String, show_results: bool):
 func _main_loop():
 	_start_round()
 	
-	timer.start(difficulty_info.timer_length)
+	timer.start(game_stats.timer_length)
 	await timer.timeout
-	
+		
 	game_stats.computer_move = ai.get_computer_move(game_stats.player_move)
 	
 	_end_round()

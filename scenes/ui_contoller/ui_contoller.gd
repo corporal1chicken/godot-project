@@ -1,18 +1,8 @@
 extends Node
 
-# Next Feature:
-# - Achievements
-# - Second Minigame (Calibration Style, get a question and quickly give answer)
-
 # Bugs/To Do
-# - [✓] Some UI not changed
-# - [✓] Results screen is broken
-# - [✓] Quit button for midgame
-# - [✓] Overlay for details on what you're playing (mode, difficulty, modifier)
-# - [✓] Capitalisation for some buttons
-# - [] If the pause menu is closed, whilst the control is open, bugs out
-# - [] Could differentiate focus/pressed styles for buttons better
-# - [] Rock Paper Scissors AI
+# - False Sense modifier is probably broken
+# - Rounds counter doesn't reflect actual stats
 
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 @onready var pause_menu: CanvasLayer = $pause

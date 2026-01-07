@@ -4,19 +4,19 @@ extends Control
 	"easy" = {
 		"key" = "easy",
 		"text" = "Easy",
-		"rules" = "Rules:\n- 12s timer",
+		"description" = "Rules:\n- 12s timer",
 		"timer_length" = 12
 	},
 	"medium" = {
 		"key" = "medium",
 		"text" = "Medium",
-		"rules" = "Rules:\n- 8s timer",
+		"description" = "Rules:\n- 8s timer",
 		"timer_length" = 8
 	},
 	"hard" = {
 		"key" = "hard",
 		"text" = "Hard",
-		"rules" = "Rules:\n- 4s timer",
+		"description" = "Rules:\n- 4s timer",
 		"timer_length" = 4
 	}
 }
@@ -25,41 +25,41 @@ extends Control
 	"first_to" = {
 		"key" = "first_to",
 		"text" = "First To 3",
-		"rules" = "Rules:\n- Infinite Rounds\n- Game ends when soeone reaches 3 points",
+		"description" = "Rules:\n- Infinite Rounds\n- Game ends when soeone reaches 3 points",
 		"total_rounds" = "inf",
 		"max_score" = 3
 	},
 	"best_of" = {
 		"key" = "best_of",
 		"text" = "Best of 5",
-		"rules" = "Rules:\n- Total of 5 Rounds",
+		"description" = "Rules:\n- Total of 5 Rounds",
 		"total_rounds" = 5
 	},
 	"survival" = {
 		"key" = "survival",
 		"text" = "Survival",
-		"rules" = "Rules:\n- Double points\n- Game ends when you lose your streak",
+		"description" = "Rules:\n- Double points\n- Game ends when you lose your streak",
 		"total_rounds" = "inf",
 		"points_on_win" = 2
 	},
 	"endless" = {
 		"key" = "endless",
 		"text" = "Endless",
-		"rules" = "Rules:\n- There are mone",
+		"description" = "Rules:\n- There are mone",
 		"total_rounds" = "inf"
 	},
 	"comeback" = {
 		"key" = "comeback",
 		"text" = "Comeback",
-		"rules" = "Rules:\n- Total is 7 Rounds\n- AI starts on 3 points\n- Game ends when someone reaches 7 points",
+		"description" = "Rules:\n- Total is 7 Rounds\n- AI starts on 3 points\n- Game ends when someone reaches 7 points",
 		"total_rounds" = 8,
 		"max_score" = 7,
-		"starting_points" = 3
+		"computer_score" = 3
 	},
 	"no_repeat" = {
 		"key" = "no_repeat",
 		"text" = "No Repeat",
-		"rules" = "Rules:\n- Infinite Rounds\n- Game ends when you play the same move twice in a row",
+		"description" = "Rules:\n- Infinite Rounds\n- Game ends when you play the same move twice in a row",
 		"total_rounds" = "inf"
 	},
 }
@@ -68,17 +68,32 @@ extends Control
 	"lock_input" = {
 		"key" = "lock_input",
 		"text" = "Lock Input",
-		"rules" = "Once you pick your move, there's no switching!"
+		"description" = "Once you pick your move, there's no switching!"
 	},
 	"double_points" = {
 		"key" = "double_points",
 		"text" = "Double Points",
-		"rules" = "+2 for every win"
+		"description" = "+2 for every win."
 	},
 	"on_edge" = {
 		"key" = "on_edge",
 		"text" = "On Edge",
-		"rules" = "Every draw yields a 50% chance to lose 1 point"
+		"description" = "Every draw yields a 50% chance to lose 1 point."
+	},
+	"false_sense" = {
+		"key" = "false_sense",
+		"text" = "False Sense",
+		"description" = "Your first loss doesn't count!"
+	},
+	"less_time" = {
+		"key" = "less_time",
+		"text" = "Shrinking Time",
+		"description" = "The timer starts at 5s and decreases by -0.2s every round, down to 1s!"
+	},
+	"fair_game" = {
+		"key" = "fair_game",
+		"text" = "Fair Game",
+		"description" = "AI will get 1 point every 3 rounds"
 	}
 }
 
@@ -90,7 +105,7 @@ func _ready() -> void:
 	for key in gamemode_config.keys():
 		var button = _create_button(
 			gamemode_config[key].key,
-			gamemode_config[key].rules,
+			gamemode_config[key].description,
 			gamemode_config[key].text,
 			$gamemodes
 		)
@@ -100,7 +115,7 @@ func _ready() -> void:
 	for key in difficulty_config.keys():
 		var button = _create_button(
 			difficulty_config[key].key,
-			difficulty_config[key].rules,
+			difficulty_config[key].description,
 			difficulty_config[key].text,
 			$difficulties
 		)
@@ -110,7 +125,7 @@ func _ready() -> void:
 	for key in modifier_config.keys():
 		var button = _create_button(
 			modifier_config[key].key,
-			modifier_config[key].rules,
+			modifier_config[key].description,
 			modifier_config[key].text,
 			$modifiers
 		)
@@ -139,6 +154,9 @@ func _on_option_pressed(args: Array):
 			chosen_modifier = args[1]
 			
 	$start.text = "Start " + gamemode_config.get(chosen_gamemode).text + " (" + difficulty_config.get(chosen_difficulty).text + ")"
+
+func _on_no_modifier_pressed():
+	chosen_modifier = ""
 
 func get_selected_options() -> Dictionary:
 	return {
