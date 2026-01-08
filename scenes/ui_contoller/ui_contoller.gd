@@ -1,9 +1,5 @@
 extends Node
 
-# Bugs/To Do
-# - False Sense modifier is probably broken
-# - Rounds counter doesn't reflect actual stats
-
 @onready var canvas_layer: CanvasLayer = $CanvasLayer
 @onready var pause_menu: CanvasLayer = $pause
 

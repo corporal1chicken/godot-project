@@ -65,3 +65,7 @@ Fixed a ton of bugs including some gamemodes ending on the first round, results 
 ---
 ### Commit 15: Small Refactor
 Rewrote gamemode.gd to be less "if/elif" block. main.gd also only relies on game_stats as opposed to 3 separate dictionaries for difficulty/gamemode/modifier. Also added 3 more modifiers, false sense discards your first loss. Shrinking time decreases the timer by 0.2s down to 1s every round. Fair game gives the AI 1 point every 3 rounds. Also able to deselect modifiers.
+
+---
+### Commit 16: Small Additions
+Added a random modifier option, a play again button for RPS. Also added an animation for the results screen. Fixed bugs where the 'Safety Net' modifier didn't work and the round counter was stuck at infinite.

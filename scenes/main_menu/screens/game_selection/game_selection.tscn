@@ -79,4 +79,20 @@ theme_override_styles/focus = ExtResource("6_cauf0")
 disabled = true
 text = "Select a game!"
 
+[node name="title" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = 35.0
+offset_right = -2.0
+offset_bottom = -593.85126
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.0093395)
+theme_override_font_sizes/normal_font_size = 48
+text = "Choose a Game"
+horizontal_alignment = 1
+
 [connection signal="pressed" from="confirm" to="." method="_on_confirm_pressed"]

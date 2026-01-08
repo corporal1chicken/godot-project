@@ -57,20 +57,18 @@ theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = ExtResource("3_hrs7e")
 text = "achievements"
 
-[node name="title" type="RichTextLabel" parent="."]
-visible = false
+[node name="title2" type="RichTextLabel" parent="."]
 layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -474.0
-offset_top = 36.0
-offset_right = 476.0
-offset_bottom = 132.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = 35.0
+offset_right = -2.0
+offset_bottom = -593.85126
 grow_horizontal = 2
-theme_override_colors/default_color = Color(1, 1, 1, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/normal_font_size = 70
-text = "Main Menu"
+grow_vertical = 2
+scale = Vector2(1, 1.0093395)
+theme_override_font_sizes/normal_font_size = 48
+text = "Menu Options"
 horizontal_alignment = 1

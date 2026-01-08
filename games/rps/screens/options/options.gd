@@ -9,7 +9,7 @@ extends Control
 	},
 	"medium" = {
 		"key" = "medium",
-		"text" = "Medium",
+		"text" = "Normal",
 		"description" = "Rules:\n- 8s timer",
 		"timer_length" = 8
 	},
@@ -26,33 +26,33 @@ extends Control
 		"key" = "first_to",
 		"text" = "First To 3",
 		"description" = "Rules:\n- Infinite Rounds\n- Game ends when soeone reaches 3 points",
-		"total_rounds" = "inf",
+		"max_rounds" = -1,
 		"max_score" = 3
 	},
 	"best_of" = {
 		"key" = "best_of",
 		"text" = "Best of 5",
 		"description" = "Rules:\n- Total of 5 Rounds",
-		"total_rounds" = 5
+		"max_rounds" = 5
 	},
 	"survival" = {
 		"key" = "survival",
 		"text" = "Survival",
 		"description" = "Rules:\n- Double points\n- Game ends when you lose your streak",
-		"total_rounds" = "inf",
+		"max_rounds" = -1,
 		"points_on_win" = 2
 	},
 	"endless" = {
 		"key" = "endless",
 		"text" = "Endless",
-		"description" = "Rules:\n- There are mone",
-		"total_rounds" = "inf"
+		"description" = "Rules:\n- There are none",
+		"max_rounds" = -1
 	},
 	"comeback" = {
 		"key" = "comeback",
 		"text" = "Comeback",
 		"description" = "Rules:\n- Total is 7 Rounds\n- AI starts on 3 points\n- Game ends when someone reaches 7 points",
-		"total_rounds" = 8,
+		"max_rounds" = 8,
 		"max_score" = 7,
 		"computer_score" = 3
 	},
@@ -60,7 +60,7 @@ extends Control
 		"key" = "no_repeat",
 		"text" = "No Repeat",
 		"description" = "Rules:\n- Infinite Rounds\n- Game ends when you play the same move twice in a row",
-		"total_rounds" = "inf"
+		"max_rounds" = -1
 	},
 }
 
@@ -82,12 +82,12 @@ extends Control
 	},
 	"false_sense" = {
 		"key" = "false_sense",
-		"text" = "False Sense",
+		"text" = "Safety Net",
 		"description" = "Your first loss doesn't count!"
 	},
 	"less_time" = {
 		"key" = "less_time",
-		"text" = "Shrinking Time",
+		"text" = "Shrinking Timer",
 		"description" = "The timer starts at 5s and decreases by -0.2s every round, down to 1s!"
 	},
 	"fair_game" = {
@@ -96,6 +96,8 @@ extends Control
 		"description" = "AI will get 1 point every 3 rounds"
 	}
 }
+
+@onready var button_template: Button = $button_template
 
 var chosen_difficulty: String = "easy"
 var chosen_gamemode: String = "endless"
@@ -134,7 +136,7 @@ func _ready() -> void:
 
 
 func _create_button(key: String, tooltip: String, text: String, parent) -> Button:
-	var clone: Button = $gamemodes/template.duplicate()
+	var clone: Button = button_template.duplicate()
 	clone.visible = true
 	
 	clone.text = text
@@ -157,6 +159,9 @@ func _on_option_pressed(args: Array):
 
 func _on_no_modifier_pressed():
 	chosen_modifier = ""
+	
+func _on_random_modifier_pressed():
+	chosen_modifier = modifier_config.keys().pick_random()
 
 func get_selected_options() -> Dictionary:
 	return {

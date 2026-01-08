@@ -25,25 +25,12 @@ layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_left = 188.0
-offset_top = -82.99997
-offset_right = 329.0
-offset_bottom = 84.00003
+offset_left = 190.0
+offset_top = -85.0
+offset_right = 331.0
+offset_bottom = 82.0
 grow_vertical = 2
 scale = Vector2(1.0167471, 1)
-
-[node name="template" type="Button" parent="gamemodes"]
-visible = false
-layout_mode = 2
-tooltip_text = "Rules:
-- Total of 5 Rounds"
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = ExtResource("3_7pfc7")
-theme_override_styles/pressed = ExtResource("4_p5u1t")
-theme_override_styles/hover = ExtResource("5_jlsk3")
-theme_override_styles/focus = ExtResource("6_7pns4")
-text = "template"
 
 [node name="modifiers" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -94,12 +81,11 @@ autowrap_mode = 3
 
 [node name="no_modifier" type="Button" parent="."]
 layout_mode = 0
-offset_left = 454.0
+offset_left = 474.0
 offset_top = 530.0
-offset_right = 669.0
+offset_right = 689.0
 offset_bottom = 577.0
-tooltip_text = "Rules:
-- Total of 5 Rounds"
+tooltip_text = "Cancel your modifier."
 theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = ExtResource("3_7pfc7")
@@ -108,4 +94,53 @@ theme_override_styles/hover = ExtResource("5_jlsk3")
 theme_override_styles/focus = ExtResource("6_7pns4")
 text = "No Modifier"
 
+[node name="random_modifier" type="Button" parent="."]
+layout_mode = 0
+offset_left = 474.0
+offset_top = 586.0
+offset_right = 689.0
+offset_bottom = 633.0
+tooltip_text = "Pick any random modifier!"
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("3_7pfc7")
+theme_override_styles/pressed = ExtResource("4_p5u1t")
+theme_override_styles/hover = ExtResource("5_jlsk3")
+theme_override_styles/focus = ExtResource("6_7pns4")
+text = "Random"
+
+[node name="title" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = 35.0
+offset_right = -2.0
+offset_bottom = -617.6292
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1, 1.0093395)
+theme_override_font_sizes/normal_font_size = 48
+text = "Rock Paper Scissors"
+horizontal_alignment = 1
+
+[node name="button_template" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 190.0
+offset_top = 275.0
+offset_right = 348.0
+offset_bottom = 322.0
+tooltip_text = "Rules:
+- Total of 5 Rounds"
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("3_7pfc7")
+theme_override_styles/pressed = ExtResource("4_p5u1t")
+theme_override_styles/hover = ExtResource("5_jlsk3")
+theme_override_styles/focus = ExtResource("6_7pns4")
+text = "template"
+
 [connection signal="pressed" from="no_modifier" to="." method="_on_no_modifier_pressed"]
+[connection signal="pressed" from="random_modifier" to="." method="_on_random_modifier_pressed"]

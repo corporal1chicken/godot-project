@@ -35,7 +35,7 @@ var default_game_stats = {
 	points_on_win = 1,
 	points_on_loss = 1,
 	rounds_played = 0,
-	max_rounds = "inf",
+	max_rounds = -1,
 	total_playtime = 0.0,
 	override_timer_length = false,
 	new_timer_length = 5.0,
@@ -46,6 +46,11 @@ var default_game_stats = {
 var game_stats: Dictionary
 
 var game_ended = false
+
+# For Game Restart
+var current_gamemode: Dictionary
+var current_difficulty: Dictionary
+var current_modifier
 
 # Godot Specific Functions
 func _ready() -> void:
@@ -125,7 +130,9 @@ func _determine_streak(outcome: String):
 func _update_round_text():
 	$score_count.text = "player: %d | AI: %d" % [game_stats.player_score, game_stats.computer_score]
 	$overlay/streak.text = "streak: %d\nbest: %d" % [game_stats.current_streak, game_stats.best_streak]
-	$overlay/rounds_played.text = "round\n" + str(game_stats.rounds_played) + "/" + str(game_stats.max_rounds)
+	$overlay/rounds_played.text = "round\n%d/%s" % [game_stats.rounds_played, (
+		str(game_stats.max_rounds) if game_stats.max_rounds != -1 else "inf"
+	)]
 	
 func _get_winner():
 	if game_stats.player_move == "":
@@ -204,8 +211,15 @@ func _end_round():
 	_update_round_text()
 	
 	pass
-	
+
+# Game Functions
+func restart_game():
+	start_game(current_gamemode, current_difficulty, current_modifier)
+
 func start_game(chosen_gamemode: Dictionary, chosen_difficulty: Dictionary, chosen_modifier):
+	current_gamemode = chosen_gamemode
+	current_difficulty = chosen_difficulty
+	current_modifier = chosen_modifier
 	
 	game_stats = gamemode.setup_game(default_game_stats, chosen_gamemode, chosen_modifier, chosen_difficulty)
 
