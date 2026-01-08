@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://brj0pxw043y7c"]
+[gd_scene load_steps=14 format=3 uid="uid://brj0pxw043y7c"]
 
 [ext_resource type="FontFile" uid="uid://c52roshcextrd" path="res://fonts/jbmono.ttf" id="1_21jpu"]
 [ext_resource type="Script" uid="uid://ddrt78p8a5ym6" path="res://games/rps/screens/main/main.gd" id="1_rrh38"]
@@ -12,6 +12,115 @@
 
 [sub_resource type="Theme" id="Theme_syy7l"]
 default_font = ExtResource("1_21jpu")
+
+[sub_resource type="Animation" id="Animation_21jpu"]
+resource_name = "show_overlay"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("overlay/rounds_played:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1300, 15), Vector2(1158, 15)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("overlay/quit:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-256, 622.00006), Vector2(13, 622.00006)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("overlay/currently_playing:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-257, 299), Vector2(12, 299)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("overlay/streak:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-257, 17), Vector2(12, 17)]
+}
+
+[sub_resource type="Animation" id="Animation_vkrnm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("overlay/rounds_played:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1300, 15)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("overlay/quit:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-256, 622.00006)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("overlay/currently_playing:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-257, 299)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("overlay/streak:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-257, 17)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g1e56"]
+_data = {
+&"RESET": SubResource("Animation_vkrnm"),
+&"show_overlay": SubResource("Animation_21jpu")
+}
 
 [node name="main" type="Control" node_paths=PackedStringArray("ai", "gamemode")]
 layout_mode = 3
@@ -38,31 +147,31 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 12.0
+offset_left = -257.0
 offset_top = 17.0
-offset_right = -1131.0
+offset_right = -1391.0012
 offset_bottom = -622.7495
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1, 1.0093395)
 theme_override_font_sizes/normal_font_size = 24
-text = "streak: 0
-best: 0"
-horizontal_alignment = 1
+text = "[0] Streak
+[0] Best"
 
 [node name="currently_playing" type="RichTextLabel" parent="overlay"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 12.0
+offset_left = -257.0
 offset_top = 299.0
-offset_right = -935.0
-offset_bottom = -313.00858
+offset_right = -1245.0002
+offset_bottom = -354.61993
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1, 1.0093395)
-theme_override_font_sizes/normal_font_size = 20
+theme_override_colors/default_color = Color(1, 1, 1, 0.4745098)
+theme_override_font_sizes/normal_font_size = 16
 text = "Difficulty: easy
 Gamemode: survival
 Modifier: on edge"
@@ -72,78 +181,28 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1144.0
+offset_left = 1300.0
 offset_top = 15.0
-offset_right = -17.0
+offset_right = 139.0
 offset_bottom = -627.72174
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1, 1.0093395)
 theme_override_font_sizes/normal_font_size = 24
-text = "round
-1/3"
+text = "Round
+[1/3]"
 horizontal_alignment = 1
 
-[node name="moves" type="HBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -155.0
-offset_top = -183.0
-offset_right = 155.0
-offset_bottom = -130.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="rock" type="Button" parent="moves"]
-layout_mode = 2
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = ExtResource("3_vkrnm")
-theme_override_styles/pressed = ExtResource("4_g1e56")
-theme_override_styles/hover = ExtResource("5_a2agg")
-theme_override_styles/disabled = ExtResource("6_hgfv1")
-theme_override_styles/focus = ExtResource("7_w4fab")
-disabled = true
-text = " [1] Rock "
-
-[node name="paper" type="Button" parent="moves"]
-layout_mode = 2
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = ExtResource("3_vkrnm")
-theme_override_styles/pressed = ExtResource("4_g1e56")
-theme_override_styles/hover = ExtResource("5_a2agg")
-theme_override_styles/disabled = ExtResource("6_hgfv1")
-theme_override_styles/focus = ExtResource("7_w4fab")
-disabled = true
-text = " [2] Paper "
-
-[node name="scissors" type="Button" parent="moves"]
-layout_mode = 2
-theme_override_constants/outline_size = 5
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = ExtResource("3_vkrnm")
-theme_override_styles/pressed = ExtResource("4_g1e56")
-theme_override_styles/hover = ExtResource("5_a2agg")
-theme_override_styles/disabled = ExtResource("6_hgfv1")
-theme_override_styles/focus = ExtResource("7_w4fab")
-disabled = true
-text = " [3] Scissors "
-
-[node name="quit" type="Button" parent="."]
+[node name="quit" type="Button" parent="overlay"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -627.0
+offset_left = -896.0
 offset_top = 262.00006
-offset_right = -324.36844
+offset_right = -593.3683
 offset_bottom = 358.00006
 grow_horizontal = 2
 grow_vertical = 2
@@ -155,6 +214,64 @@ theme_override_styles/pressed = ExtResource("4_g1e56")
 theme_override_styles/hover = ExtResource("5_a2agg")
 theme_override_styles/focus = ExtResource("7_w4fab")
 text = "Quit Game"
+
+[node name="moves" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -379.5
+offset_top = 173.0
+offset_right = 379.5
+offset_bottom = 226.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="rock" type="Button" parent="moves"]
+layout_mode = 0
+offset_right = 249.0
+offset_bottom = 53.0
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("3_vkrnm")
+theme_override_styles/pressed = ExtResource("4_g1e56")
+theme_override_styles/hover = ExtResource("5_a2agg")
+theme_override_styles/disabled = ExtResource("6_hgfv1")
+theme_override_styles/focus = ExtResource("7_w4fab")
+disabled = true
+text = "[1] Rock"
+
+[node name="paper" type="Button" parent="moves"]
+layout_mode = 0
+offset_left = 255.0
+offset_right = 504.0
+offset_bottom = 53.0
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("3_vkrnm")
+theme_override_styles/pressed = ExtResource("4_g1e56")
+theme_override_styles/hover = ExtResource("5_a2agg")
+theme_override_styles/disabled = ExtResource("6_hgfv1")
+theme_override_styles/focus = ExtResource("7_w4fab")
+disabled = true
+text = "[2] Paper"
+
+[node name="scissors" type="Button" parent="moves"]
+layout_mode = 0
+offset_left = 508.0
+offset_right = 757.0
+offset_bottom = 53.0
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("3_vkrnm")
+theme_override_styles/pressed = ExtResource("4_g1e56")
+theme_override_styles/hover = ExtResource("5_a2agg")
+theme_override_styles/disabled = ExtResource("6_hgfv1")
+theme_override_styles/focus = ExtResource("7_w4fab")
+disabled = true
+text = "[3] Scissors"
 
 [node name="continue" type="Button" parent="."]
 visible = false
@@ -185,14 +302,14 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -2.0
-offset_top = 19.0
+offset_top = 90.000015
 offset_right = -2.0
-offset_bottom = -609.85126
+offset_bottom = -538.85126
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1, 1.0093395)
-theme_override_font_sizes/normal_font_size = 64
-text = "time left: 5.0"
+theme_override_font_sizes/normal_font_size = 32
+text = "Time Left: 5.0"
 horizontal_alignment = 1
 
 [node name="score_count" type="RichTextLabel" parent="."]
@@ -201,14 +318,14 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = -2.0
-offset_top = 99.0
+offset_top = 22.0
 offset_right = -2.0
-offset_bottom = -548.6755
+offset_bottom = -625.6755
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1, 1.0093395)
-theme_override_font_sizes/normal_font_size = 48
-text = "player: 0 | computer: 0"
+theme_override_font_sizes/normal_font_size = 42
+text = "You [0]  |  AI [0]"
 horizontal_alignment = 1
 
 [node name="ai_move" type="RichTextLabel" parent="."]
@@ -217,31 +334,30 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 2.0
-offset_top = 213.0
+offset_top = 188.0
 offset_right = 2.0
-offset_bottom = -430.71246
+offset_bottom = -455.71246
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1, 1.0093395)
-theme_override_font_sizes/normal_font_size = 50
+theme_override_font_sizes/normal_font_size = 45
 bbcode_enabled = true
-text = "pick a move"
+text = "Rock, Paper or Scissors?"
 horizontal_alignment = 1
 
 [node name="round_end" type="RichTextLabel" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 2.0
-offset_top = 291.0
+offset_top = 251.0
 offset_right = 2.0
-offset_bottom = -352.71246
+offset_bottom = -392.71246
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1, 1.0093395)
-theme_override_font_sizes/normal_font_size = 30
+theme_override_font_sizes/normal_font_size = 26
 bbcode_enabled = true
 text = "you won! paper beats cheese"
 horizontal_alignment = 1
@@ -257,5 +373,10 @@ test_mode = true
 [node name="gamemode" type="Node" parent="."]
 script = ExtResource("3_ly3r3")
 
-[connection signal="pressed" from="quit" to="." method="_on_quit_pressed"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_g1e56")
+}
+
+[connection signal="pressed" from="overlay/quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="continue" to="." method="_on_continue_pressed"]

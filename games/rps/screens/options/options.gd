@@ -94,6 +94,26 @@ extends Control
 		"key" = "fair_game",
 		"text" = "Fair Game",
 		"description" = "AI will get 1 point every 3 rounds"
+	},
+	"house_rules" = {
+		"key" = "house_rules",
+		"text" = "House Rules",
+		"description" = "Every 2 rounds, you and the AI lose 1 point."
+	},
+	"thats_mean" = {
+		"key" = "thats_mean",
+		"text" = "That's Mean",
+		"description" = "Draws count as a loss, and lose an additional point."
+	},
+	"unfair_start" = {
+		"key" = "unfair_start",
+		"text" = "Unfair Start",
+		"description" = "You start at -4 points"
+	},
+	"its_mine" = {
+		"key" = "its_mine",
+		"text" = "It's Mine Now",
+		"description" = "At the end of the game, you swap with the AI's points."
 	}
 }
 

@@ -28,6 +28,8 @@ func _modifier_edit(game_stats: Dictionary):
 			game_stats.points_on_win *= 2
 		elif key == "less_time":
 			game_stats.timer_length = 5
+		elif key == "unfair_start":
+			game_stats.player_score = -4
 	
 	return game_stats
 
@@ -54,7 +56,7 @@ func check_rules(game_state: Dictionary) -> Array:
 
 func _best_of_rules(game_state: Dictionary):
 	if game_state.rounds_played == gamemode.max_rounds:
-		return [true, "Max rounds played!"]
+		return [true, "All rounds played!"]
 		
 	return [false, ""]
 	
@@ -66,7 +68,7 @@ func _survival_rules(game_state: Dictionary):
 	
 func _comeback_rules(game_state: Dictionary):
 	if game_state.rounds_played == gamemode.max_rounds:
-		return [true, "Max rounds played"]
+		return [true, "All rounds played"]
 	else:
 		if game_state.computer_score == gamemode.max_score:
 			return [true, "AI got 7 points"]
@@ -81,6 +83,6 @@ func _first_to_rules(game_state: Dictionary):
 	
 func _no_repeat_rules(game_state: Dictionary):
 	if game_state.rounds_played > 1 and game_state.player_move == game_state.player_history[-2]:
-		return [true, ("You played %s twice in a row!" % [game_state.player_move])]
+		return [true, ("You played %s twice in a row!" % [game_state.player_move.capitalize()])]
 
 	return [false, ""]

@@ -128,7 +128,8 @@ offset_left = 1.0
 offset_top = 130.0
 offset_right = 403.0
 offset_bottom = 260.0
-theme_override_font_sizes/normal_font_size = 58
+theme_override_constants/outline_size = 5
+theme_override_font_sizes/normal_font_size = 52
 bbcode_enabled = true
 text = "Game Paused
 "

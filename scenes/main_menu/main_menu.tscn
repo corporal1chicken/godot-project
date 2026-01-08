@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bnccu2ow4wabv"]
+[gd_scene load_steps=6 format=3 uid="uid://bnccu2ow4wabv"]
 
 [ext_resource type="Script" uid="uid://cegpwxwxwf45p" path="res://scenes/main_menu/main_menu.gd" id="1_fsom3"]
 [ext_resource type="PackedScene" uid="uid://2loq2bltv74p" path="res://scenes/main_menu/screens/play_screen/play_screen.tscn" id="3_ob46e"]
 [ext_resource type="PackedScene" uid="uid://dheswd8eoh5t" path="res://scenes/main_menu/screens/game_selection/game_selection.tscn" id="4_uqeha"]
 [ext_resource type="PackedScene" uid="uid://d1mjebqhyvix2" path="res://scenes/main_menu/screens/selection/selection.tscn" id="4_wem23"]
+[ext_resource type="PackedScene" uid="uid://dw7n3bqyc4vvh" path="res://scenes/main_menu/screens/about/about.tscn" id="5_wem23"]
 
 [node name="main_menu" type="Control"]
 layout_mode = 3
@@ -35,6 +36,10 @@ offset_bottom = 0.0
 scale = Vector2(0.9720244, 0.98248845)
 
 [node name="selection" parent="." instance=ExtResource("4_wem23")]
+visible = false
+layout_mode = 1
+
+[node name="about" parent="." instance=ExtResource("5_wem23")]
 visible = false
 layout_mode = 1
 

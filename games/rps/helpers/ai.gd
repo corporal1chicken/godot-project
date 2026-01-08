@@ -12,6 +12,6 @@ func get_computer_move(player_move) -> String:
 	else:
 		move = MOVES.pick_random()
 	
-	$"../ai_move".text = "AI picked %s against your %s" % [move, player_move]
+	$"../ai_move".text = "AI picked %s against your %s" % [move.capitalize(), player_move.capitalize()]
 	
 	return move

@@ -47,6 +47,8 @@ var game_stats: Dictionary
 
 var game_ended = false
 
+var overlay_visible = false
+
 # For Game Restart
 var current_gamemode: Dictionary
 var current_difficulty: Dictionary
@@ -66,7 +68,7 @@ func _process(delta: float) -> void:
 	if timer.is_stopped():
 		return
 		
-	$time_left.text = "time left: %.1f" % timer.time_left
+	$time_left.text = "Time Left: %.1f" % timer.time_left
 	
 	if not game_ended:
 		game_stats.total_playtime += delta
@@ -96,8 +98,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		_on_continue_pressed()
 		$continue.grab_focus()
 	elif event.is_action_pressed("rps_overlay"):
-		$overlay.visible = not $overlay.visible
-	
+		
+		
+		if $AnimationPlayer.is_playing(): return
+		if overlay_visible:
+			overlay_visible = false
+			$AnimationPlayer.play_backwards("show_overlay")
+		else:
+			overlay_visible = true
+			$AnimationPlayer.play("show_overlay")
+		
 	pass
 
 # On Button Press Functions
@@ -128,13 +138,23 @@ func _determine_streak(outcome: String):
 		game_stats.current_streak = 0
 	
 func _update_round_text():
-	$score_count.text = "player: %d | AI: %d" % [game_stats.player_score, game_stats.computer_score]
-	$overlay/streak.text = "streak: %d\nbest: %d" % [game_stats.current_streak, game_stats.best_streak]
-	$overlay/rounds_played.text = "round\n%d/%s" % [game_stats.rounds_played, (
-		str(game_stats.max_rounds) if game_stats.max_rounds != -1 else "inf"
+	$score_count.text = "You [%d]  |  AI [%d]" % [game_stats.player_score, game_stats.computer_score]
+	$overlay/streak.text = "[%d] Streak\n[%d] Best" % [game_stats.current_streak, game_stats.best_streak]
+	$overlay/rounds_played.text = "Round\n[%d/%s]" % [game_stats.rounds_played, (
+		str(game_stats.max_rounds) if game_stats.max_rounds != -1 else "♾"
 	)]
 	
 func _get_winner():
+	if game_stats.player_move != "":
+		game_stats.player_history.append(game_stats.player_move)
+		
+	if game_stats.modifiers_active.has("house_rules"):
+		if game_stats.rounds_played > 0 and game_stats.rounds_played % 2 == 0:
+			$round_end.text = "The House took their share! [-1 to you, -1 to AI]"
+			game_stats.player_score -= 1
+			game_stats.computer_score -= 1
+			return
+	
 	if game_stats.player_move == "":
 		$round_end.text = "You didn't pick a move. [-1 to you, +1 to AI]"
 		game_stats.computer_score += game_stats.points_on_win
@@ -144,21 +164,30 @@ func _get_winner():
 
 		if game_stats.modifiers_active.has("on_edge"):
 			if randf() < 0.5:
-				$round_end.text = "Draw but you got On Edge Modifier! [-1 to you]"
+				$round_end.text = "Draw, but the On Edge modifier is active! [-1 to you]"
 				game_stats.player_score -= 1
 			else:
-				$round_end.text = "Draw but you avoided the On Edge Modifier this time!"
+				$round_end.text = "Draw, but you avoided the On Edge modifier this time!"
+		elif game_stats.modifiers_active.has("thats_mean"):
+			$round_end.text = "Draw, but That's Mean is active! Counted as a loss. [-2 to you]"
+			game_stats.player_score -= 2
+			game_stats.losses += 1
+			_determine_streak("loss")
 		else:
 			$round_end.text = "Draw, no points awarded."
 		
 	elif RULES.get(game_stats.player_move) == game_stats.computer_move:
-		$round_end.text = "you win! " + game_stats.player_move + " beats " + game_stats.computer_move + ". [+1 to you]"
+		if game_stats.modifiers_active.has("double_points"):
+			$round_end.text = "You win, and you have Double Points active! [+2 points]"
+		else:
+			$round_end.text = "You win! [+1 points]"
+		
 		game_stats.player_score += game_stats.points_on_win
 		_determine_streak("win")
 	else:
 		if game_stats.modifiers_active.has("fair_game"):
 			if game_stats.rounds_played > 0 and game_stats.rounds_played % 3 == 0:
-				$round_end.text = "You lost but you have Fair Game active! [+%d, +1 additional to AI]" % [game_stats.points_on_loss]
+				$round_end.text = "You lost, but you have Fair Game active! [+%d, +1 additional to AI]" % [game_stats.points_on_loss]
 				game_stats.computer_score += (game_stats.points_on_loss + 1)
 				game_stats.losses += 1
 				_determine_streak("loss")
@@ -170,9 +199,6 @@ func _get_winner():
 			game_stats.computer_score += game_stats.points_on_loss
 			game_stats.losses += 1
 			_determine_streak("loss")
-	
-	if game_stats.player_move != "":
-		game_stats.player_history.append(game_stats.player_move)
 
 	pass
 	
@@ -188,7 +214,7 @@ func _start_round():
 	_toggle_moves_button(false)
 	
 	game_stats.player_move = ""
-	$ai_move.text = "pick a move"
+	$ai_move.text = "Rock, Paper or Scissors?"
 	
 	pass
 
@@ -200,6 +226,8 @@ func _end_round():
 	
 	$continue.visible = true
 	$round_end.visible = true
+	
+	$time_left.text = "Times up!"
 	
 	if game_stats.player_move != "":		
 		game_stats.played_moves[game_stats.player_move] = game_stats.played_moves.get(game_stats.player_move) + 1
@@ -242,6 +270,12 @@ func _end_game(outcome_text: String, show_results: bool):
 	_toggle_moves_button(true)
 	
 	game_ended = true
+	
+	if game_stats.modifiers_active.has("its_mine"):
+		var old_player_score = game_stats.player_score
+		game_stats.player_score = game_stats.computer_score
+		game_stats.computer_score = old_player_score
+		outcome_text = outcome_text + " and It's Mine Now was active!"
 	
 	if show_results:
 		results.set_results_screen(game_stats, outcome_text)

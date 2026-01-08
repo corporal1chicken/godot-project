@@ -69,3 +69,7 @@ Rewrote gamemode.gd to be less "if/elif" block. main.gd also only relies on game
 ---
 ### Commit 16: Small Additions
 Added a random modifier option, a play again button for RPS. Also added an animation for the results screen. Fixed bugs where the 'Safety Net' modifier didn't work and the round counter was stuck at infinite.
+
+---
+### Commit 17: Final Polish
+Likely the final commit. Added a small about section, changed some text to make it look nicer. Added 4 more modifiers. House rules take -1 point from you and the AI every 2 rounds, that's mean make draws count as a loss and -1 point. Unfair start where you start at -4 points and its mine forces you and the AI to swap points at the end of the game. This was a fun project to make, Godot is great.

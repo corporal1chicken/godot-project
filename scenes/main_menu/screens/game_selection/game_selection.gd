@@ -20,3 +20,6 @@ func _on_game_pressed(game_name: String):
 	
 	if selected_game != "":
 		$confirm.disabled = false
+
+func _on_return_pressed() -> void:
+	Signals.change_sub_screen.emit("game_selection", "selection")
